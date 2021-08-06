@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+<body>
+  <header class="header">
+    <div class="header__logo"></div>
+    <h1 class="header__title">Mesto</h1>
+  </header>
+  <main class="page">
+    <section class="profile">
+      <img class="profile__avatar" alt="profile's foto" src="./images/avatar.jpg">
+      <div class="profile__info">
+        <p class="profile__name">Жак-Ив Кусто</p>
+        <p class="profile__specification">Исследователь океана</p>
+      </div>
+      <button class="profile__open-popup"><img class="profile__ico" src="./images/open-popup.svg"</button>
+      <button class="profile__adding-button"><img class="profile__ico profile__ico_adding" src="./images/plus.svg"></button>
+    </section>
+    <section class="places">
+      <article class="place">
+        <img class="place__img" src="./images/Baikal.jpg">
+        <p class="place__paragraf">Байкал</p>
+      </article>
+      <article class="place">
+        <img class="place__img" src="./images/Fiolent.jpg">
+        <p class="place__paragraf">Мыс Фиолент</p>
+      </article>
+      <article class="place">
+        <img class="place__img" src="./images/Moskow.jpg">
+        <p class="place__paragraf">Москва</p>
+      </article>
+      <article class="place">
+        <img class="place__img" src="./images/Peterhof.jpg">
+        <p class="place__paragraf">Петергоф</p>
+      </article>
+      <article class="place">
+        <img class="place__img" src="./images/Rostow.jpg">
+        <p class="place__paragraf">Ростов-на-Дону</p>
+      </article>
+      <article class="place">
+        <img class="place__img" src="./images/SPB.jpg">
+        <p class="place__paragraf">Санкт-Петербург</p>
+        <button class="place__like-button" type="button"><span class="place__heart"></span></button>
+      </article>
+    </section>
+    <section class="popup">
+      <form class="popup__container">
+        <p class="popup__title">Редактировать профиль</p>
+        <input class="popup__name" type="text" placeholder="Жак-Ив Кусто">
+        <input class="popup__specification" type="text" placeholder="Исследователь океана" >
+        <input class="popup__submit-button" type="submit" value="Сохранить" >
+        <label>
+          <input class="popup__reset-button" type="reset">
+          <span class="popup__cross"></span> <!-- этот будем стилизовать -->
+        </label>
+      </form>
+    </section>
+  </main>
+  <footer class="footer">
+    <span class="footer__copiright">© 2021. Mesto Russia</span>
+  </footer>
+</body>
+</html>
