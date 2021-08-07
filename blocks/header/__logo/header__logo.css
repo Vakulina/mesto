@@ -2,5 +2,13 @@
   background-image: url("../../../images/logo.svg");
   width: 142px;
   height: 33px;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+@media (max-width: 725px) {
+  .header__logo {
+    margin-left: 27px;
+    height: 25px;
+    width: 104px;
+  }
 }

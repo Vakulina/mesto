@@ -1,0 +1,10 @@
+.profile__adding-ico {
+  width: 22px;
+  height: 22px;
+}
+@media (max-width: 725px) {
+  .profile__adding-ico {
+    width: 18px;
+    height: 18px;
+  }
+}

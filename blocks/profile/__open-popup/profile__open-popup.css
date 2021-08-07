@@ -1,0 +1,23 @@
+.profile__open-popup {
+  width: 24px;
+  height: 24px;
+  align-self: center;
+    background-color: #000000;
+  border: none;
+  margin-top: 3px;
+  margin-right: 18px;
+  margin-left: 20px;
+  object-fit: contain;
+  transition-duration: 200ms;
+}
+.profile__open-popup:hover {
+  filter: opacity(60%);
+}
+@media (max-width: 725px) {
+  .profile__open-popup {
+    width: 18px;
+    height: 18px;
+    margin-right: 0;
+    margin-left: 8px;
+  }
+}

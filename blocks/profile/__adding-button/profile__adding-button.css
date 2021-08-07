@@ -1,0 +1,21 @@
+.profile__adding-button{
+  margin-left: auto;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  background-color: #000000;
+  border-radius: 2px;
+  transition-property: filter;
+  transition-duration: 200ms;
+  padding: 0;
+}
+.profile__adding-button:hover {
+  filter: opacity(60%);
+}
+@media (max-width: 725px) {
+  .profile__adding-button {
+    width: 100%;
+    margin-top: 31px;
+    box-sizing: border-box;
+  }
+}
