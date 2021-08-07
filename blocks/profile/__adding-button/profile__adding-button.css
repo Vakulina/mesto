@@ -14,7 +14,10 @@
 }
 @media (max-width: 725px) {
   .profile__adding-button {
+    align-self: center;
     width: 100%;
+    max-width: 282px;
+    margin: 0;
     margin-top: 31px;
     box-sizing: border-box;
   }
