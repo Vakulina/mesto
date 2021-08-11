@@ -8,12 +8,17 @@
   min-height: 27px;
   position: relative;
 }
-
+.popup__specification:active, :focus {
+  outline: 3px solid cadetblue;
+}
 .popup__specification::-webkit-input-placeholder { 
   font-size: 14px;
   line-height: 17px;
   color: #000;
   font-family: inherit; 
+}
+.popup__specification:focus::-webkit-input-placeholder {
+  color: transparent;
 }
 .popup__specification::-moz-placeholder {
   font-size: 14px;
@@ -21,15 +26,24 @@
   color: #000;
   font-family: inherit; 
 }
+.popup__specification:focus::-moz-placeholder {
+  color: transparent;
+}
 .popup__specification::-ms-input-placeholder {  
   font-size: 14px;
   line-height: 17px;
   color: #000;
   font-family: inherit; 
 }
+.popup__specification:focus::-ms-input-placeholder { 
+  color: transparent;
+}
 .popup__specification::placeholder {
   font-size: 14px;
   line-height: 17px;
   color: #000;
   font-family: inherit; 
+}
+.popup__specification:focus::placeholder {
+  color: transparent;
 }

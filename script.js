@@ -25,5 +25,11 @@ function formSubmitHandler (evt) {
   let newName = document.querySelector('.profile__title');
   newName.textContent = nameInput.value; 
   newSpecification.textContent = jobInput.value;
+  if (!newName.textContent) {
+    newName.textContent = "Жак-Ив Кусто";
+  }
+  if (!newSpecification.textContent) {
+    newSpecification.textContent= "Исследователь океана";
+  }
 }
 formElement.addEventListener('submit', formSubmitHandler); 
