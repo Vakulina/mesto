@@ -8,5 +8,8 @@
   line-height: 22px;
   text-align: center;
   color: #ffffff;
-  
+  transition: 0.5s;
+}
+.popup__submit-button:hover {
+  opacity: 0.8;
 }

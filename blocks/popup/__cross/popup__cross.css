@@ -6,11 +6,15 @@
   position: absolute;
   top: -40px;
   right: -40px;
-
+  transition-property: filter;
+  transition-duration: 200ms;
 }
+.popup__cross:hover {
+  filter: opacity(60%);
+}
+
 @media (max-width: 725px) {
   .popup__cross {
-
     width: 20px;
     height: 20px;
     top: -36px;
