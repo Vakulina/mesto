@@ -23,6 +23,7 @@ function formSubmitHandler (evt) {
   evt.preventDefault(); 
   let newSpecification = document.querySelector('.profile__specification');
   let newName = document.querySelector('.profile__title');
+  
   newName.textContent = nameInput.value; 
   newSpecification.textContent = jobInput.value;
   if (!newName.textContent) {
