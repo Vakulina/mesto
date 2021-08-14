@@ -4,7 +4,7 @@
   font-family: inherit; 
   border: none;
   margin-bottom: 30px;
-  min-height: 27px;
+  min-height: 31px;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -13,4 +13,10 @@
   line-height: 17px;
   color: #000;
   font-family: inherit; 
+}
+@media (max-width: 625px) {
+  .popup__inputs {
+    margin: 0;
+    padding: 25px 0 0 0;
+  }
 }
