@@ -17,7 +17,6 @@
 }
 @media (max-width: 725px) {
   .profile {
-    flex-direction: column;
     padding: 40px 19px 16px 19px;
   }
 }

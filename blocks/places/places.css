@@ -16,9 +16,9 @@
 }
 @media (max-width: 660px) {
   .places { 
-  display: block;
-  padding-top: 0;
-  width: 282px;
-  margin: 0 auto;
+    display: block;
+    padding-top: 0;
+    width: 282px;
+    margin: 0 auto;
   }
 }

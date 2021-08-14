@@ -11,21 +11,16 @@ function formOpen() {
   popup.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileSpecification.textContent;
-
 }
 openPopupButton.addEventListener('click', formOpen);
-
 function formClose() {
   popup.classList.remove('popup_opened');
 }
 closePopupButton.addEventListener('click', formClose);
-
 function formSubmitHandler (evt) {
   evt.preventDefault(); 
- 
   profileName.textContent = nameInput.value; 
   profileSpecification.textContent = jobInput.value;
   formClose();
 }
 formPopup.addEventListener('submit', formSubmitHandler);
-
