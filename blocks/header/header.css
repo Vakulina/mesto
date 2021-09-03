@@ -4,7 +4,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 45px 0 41px 0;
-  box-shadow: 0 1px 0 rgba(84, 84, 84, 0.7);;
+  box-shadow: 0 1px 0 rgba(84, 84, 84, 0.7);
 }
 @media (max-width: 930px){
   .header{
