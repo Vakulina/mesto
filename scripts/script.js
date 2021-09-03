@@ -24,6 +24,22 @@ const initialCards = [
     link: './images/SPB.jpg'
   }
 ];
+//находим попапы 
+const profilePopup = document.querySelector('.popup_type_profile'); 
+const placePopup = document.querySelector('.popup_type_place');
+const imagePopup = document.querySelector('.popup_type_image');
+//находим кнопки
+const buttonOpenProfile = document.querySelector('.profile__open-popup');
+const buttonCloseProfile = document.querySelector('.popup__reset-button_type_profile');
+const buttonClosePlace = document.querySelector('.popup__reset-button_type_place');
+const buttonCloseImage = document.querySelector('.popup__reset-button_type_image');
+const submitProfile = profilePopup.querySelector('.popup__form_profile');
+const submitNewPlace = placePopup.querySelector('.popup__form_place');
+//находим инпуты
+let inputName = document.querySelector('.popup__input_type-name');
+let inputGob = document.querySelector('.popup__input_type-specification');
+let inputPlace = document.querySelector('.popup__input_type-place');
+let inputLink = document.querySelector('.popup__input_type-link');
 
 const cardTemplate = document.getElementById('place-card').content; //выбираем контейтер template с шаблоном карточки
 const likesToggle = (event) => {        //функция ставит и убирает лайки
@@ -32,11 +48,17 @@ const likesToggle = (event) => {        //функция ставит и уби�
 const deleteCard = (event) => {
   event.target.closest('.place').remove();
 }
-const openBigImage = ()=>{
 
+const openLargeImage =(event) => {
+const largeImage = imagePopup.querySelector('.popup__large-image');
+largeImage.src = event.target.src;
+console.log(event.target.parentElement.querySelector('.place__paragraf'));
+largeImage.nextElementSibling.textContent = event.target.parentElement.querySelector('.place__paragraf').textContent;
+openForm(imagePopup);
 }
 
 let postingElement; 
+
 const creatNewCard = (card) => {
   postingElement= cardTemplate.querySelector('.place').cloneNode(true); //определим шаблон карточки и клонируем его для публикации 
   const likeButton = postingElement.querySelector('.place__like-button'); //находим кнопку лайков
@@ -47,9 +69,7 @@ const creatNewCard = (card) => {
   imgOpening.alt = `Фото пользователя: ${card.name}`;
   likeButton.addEventListener('click', likesToggle ); //вешаем слушатель на кнопку лайков  
   buttonTrashPlace.addEventListener('click', deleteCard);  //вешаем слушатель на кнопку с корзиной (удалить карточку)
-  imgOpening.addEventListener('click', ()=>{
-    console.log("big image");
-  });
+  imgOpening.addEventListener('click', openLargeImage);
   return postingElement;
 }
 const postingCard = (card) => { 
@@ -60,21 +80,7 @@ const postingCard = (card) => {
 
 initialCards.forEach(postingCard); //публикуем первоначальный массив карточек
 
-//находим попапы 
-const profilePopup = document.querySelector('.popup_type_profile'); 
-const placePopup = document.querySelector('.popup_type_place');
-const imagePopup = document.querySelector('.popup_type_image');
-//находим кнопки
-const buttonOpenProfile = document.querySelector('.profile__open-popup');
-const buttonCloseProfile = document.querySelector('.popup__reset-button_profile');
-const buttonClosePlace = document.querySelector('.popup__reset-button_place');
-const submitProfile = profilePopup.querySelector('.popup__form_profile');
-const submitNewPlace = placePopup.querySelector('.popup__form_place');
-//находим инпуты
-let inputName = document.querySelector('.popup__input_type-name');
-let inputGob = document.querySelector('.popup__input_type-specification');
-let inputPlace = document.querySelector('.popup__input_type-place');
-let inputLink = document.querySelector('.popup__input_type-link');
+
 
 
 
@@ -107,7 +113,9 @@ buttonClosePlace.addEventListener('click', () => {
   placePopup.querySelector('.popup__form_place').reset(); //очистка формы place при закрытии по крестику
   closeForm(placePopup); 
 }); 
-
+buttonCloseImage.addEventListener('click', () => {
+  closeForm(imagePopup); 
+})
 
 
 function profileSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
