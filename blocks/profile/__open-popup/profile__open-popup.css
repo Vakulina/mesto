@@ -9,6 +9,7 @@
   margin-right: 18px;
   margin-left: 20px;
   transition-duration: 200ms;
+  transition-property: filter;
   padding: 0;
   background-color: transparent;
 }

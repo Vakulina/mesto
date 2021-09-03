@@ -24,32 +24,49 @@
       <button class="profile__adding-button" type="button"></button>
     </section>
     <section class="places">
-
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copiright">© 2021. Mesto Russia</p>
   </footer>
-  <section class="popup">
+  <section class="popup popup_type_profile">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <button class="popup__reset-button" type="reset"></button>
-      <form class="popup__form" name="popup__form">
-        <input class="popup__inputs" name="popup__name" type="text" placeholder="Ваше имя">
-        <input class="popup__inputs" name="popup__specification" type="text" placeholder="Ваша специальность" >
+      <button class="popup__reset-button popup__reset-button_type_profile" type="reset"></button>
+      <form class="popup__form popup__form_profile" name="profile__form">
+        <input class="popup__inputs popup__input_type-name" name="input__name" type="text" placeholder="Ваше имя">
+        <input class="popup__inputs popup__input_type-specification" name="input__specification" type="text" placeholder="Ваша специальность" >
         <button class="popup__submit-button" type="submit">Сохранить</button>
       </form>
     </div>
   </section>
-<template id="place-card">
-  <article class="place">
-    <img class="place__img" src="./images/SPB.jpg" alt="Исакиевский собор">
-    <div class="place__name">
-      <p class="place__paragraf">Санкт-Петербург</p>
-      <button class="place__like-button" type="button"></button>
+  <section class="popup popup_type_place">
+    <div class="popup__container">
+      <h2 class="popup__title">Новое место</h2>
+      <button class="popup__reset-button popup__reset-button_type_place" type="reset"></button>
+      <form class="popup__form popup__form_place" name="place__form">
+        <input class="popup__inputs popup__input_type-place" name="input__place" type="text" placeholder="Название">
+        <input class="popup__inputs popup__input_type-link" name="input__link" type="text" placeholder="Ссылка на картинку" >
+        <button class="popup__submit-button" type="submit">Создать</button>
+      </form>
     </div>
-
-  </article>
+  </section>
+  <section class="popup popup_type_image popup_opened">
+    <div class="popup__content">
+      <img class= "popup__large-image" src="./images/SPB.jpg">
+      <p class="popup__subtitle">An elephant at sunset</p>
+      <button class="popup__reset-button popup__reset-button_type_image" type="reset"></button>
+    </div>
+  </section>
+  <template id="place-card">
+    <article class="place">
+      <button class="place__trash-button" type="button"></button>
+      <img class="place__img">
+      <div class="place__name">
+        <p class="place__paragraf"></p>
+        <button class="place__like-button" type="button"></button>
+       </div>
+    </article>
   </template>
   <script src="./scripts/script.js"></script>
 </body>

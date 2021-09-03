@@ -3,7 +3,7 @@
   line-height: 17px;
   font-family: inherit; 
   border: none;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   min-height: 31px;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -11,7 +11,7 @@
 .popup__inputs::placeholder {
   font-size: 14px;
   line-height: 17px;
-  color: #000;
+  color: #C4C4C4;
   font-family: inherit; 
 }
 @media (max-width: 625px) {
