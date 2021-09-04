@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Байкал',
-    link: './images/Baikal.jpg'
-  },
-  {
-    name: 'Москва',
-    link: './images/Moskow.jpg'
-  },
-  {
-    name: 'Мыс Фиолент',
-    link: './images/Fiolent.jpg'
-  },
-  {
-    name: 'Петергоф',
-    link: './images/Peterhof.jpg'
-  },
-  {
-    name: 'Ростов-на-Дону - столица Донского края',
-    link: './images/Rostow.jpg'
-  },
-  {
-    name: 'Санкт-Петербург',
-    link: './images/SPB.jpg'
-  }
-];
-
 const profilePopup = document.querySelector('.popup_type_profile'); 
 const placePopup = document.querySelector('.popup_type_place');
 const imagePopup = document.querySelector('.popup_type_image');
@@ -42,48 +15,48 @@ const inputLink = document.querySelector('.popup__input_type_link');
 const cardTemplate = document.getElementById('place-card').content; //выбираем контейтер template с шаблоном карточки
 const profileSpecification = document.querySelector('.profile__specification');
 const profileName = document.querySelector('.profile__title');
+const largeImage = imagePopup.querySelector('.popup__large-image');
+const cardList = document.querySelector('.places');
 
-const likesToggle = (event) => {        
+const toggleLike = (event) => {        
    event.target.classList.toggle('place__like-button_active');
 };
 const deleteCard = (event) => {
   event.target.closest('.place').remove();
 }
 const openLargeImage =(event) => {
-  const largeImage = imagePopup.querySelector('.popup__large-image');
   largeImage.src = event.target.src;
+  largeImage.alt = event.target.parentElement.querySelector('.place__paragraf').textContent;
   largeImage.nextElementSibling.textContent = event.target.parentElement.querySelector('.place__paragraf').textContent;
-  openForm(imagePopup);
+  openPopup(imagePopup);
 }
 
-let postingElement; 
 
-const creatNewCard = (card) => {  //ф-я принимает на вход элемент массива карточек, возвращая новый элемент для публикации
-  postingElement= cardTemplate.querySelector('.place').cloneNode(true); 
-  const likeButton = postingElement.querySelector('.place__like-button'); 
-  const buttonTrashPlace = postingElement.querySelector('.place__trash-button');
-  const imgOpening = postingElement.querySelector('.place__img');
-  postingElement.querySelector('.place__img').src = card.link; 
-  postingElement.querySelector('.place__paragraf').textContent = card.name;
+const createNewCard = (card) => {  //ф-я принимает на вход элемент массива карточек, возвращая новый элемент для публикации
+  const newCard= cardTemplate.querySelector('.place').cloneNode(true); 
+  const likeButton = newCard.querySelector('.place__like-button'); 
+  const buttonTrashPlace = newCard.querySelector('.place__trash-button');
+  const imgOpening = newCard.querySelector('.place__img');
+  newCard.querySelector('.place__img').src = card.link; 
+  newCard.querySelector('.place__paragraf').textContent = card.name;
   imgOpening.alt = `Фото пользователя: ${card.name}`;
-  likeButton.addEventListener('click', likesToggle ); 
+  likeButton.addEventListener('click', toggleLike); 
   buttonTrashPlace.addEventListener('click', deleteCard); 
   imgOpening.addEventListener('click', openLargeImage);
-  return postingElement;
+  return newCard;
 }
-const postingCard = (card) => { //ф-я, получая на вход элемент массива карточек, публикует новую карточку в начало элемента .places
-  creatNewCard(card);
-  const placeOfPublication = document.querySelector('.places'); 
-  placeOfPublication.prepend(postingElement); 
+const renderCard = (card) => { //ф-я, получая на вход элемент массива карточек, публикует новую карточку в начало элемента .places
+  const renderingCard = createNewCard(card);
+  cardList.prepend(renderingCard); 
 };
 
-initialCards.forEach(postingCard); //публикуем первоначальный массив карточек
+initialCards.forEach(renderCard); //публикуем первоначальный массив карточек
 
 //объявляем функции открытия и закрытия попапов
-const openForm = (popup) => {  
+const openPopup = (popup) => {  
   popup.classList.add('popup_opened');
 }
-const closeForm = (popup) => {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
 }
 const fillProfileForm = () => { //заполняем поля профайл-попапа данными активного пользователя
@@ -93,20 +66,20 @@ const fillProfileForm = () => { //заполняем поля профайл-п�
 
 //добавляем слушатель кнопке "редактировать профиль" для открытия профайл-попапа
 buttonOpenProfile.addEventListener('click', () => {
-  openForm(profilePopup);
+  openPopup(profilePopup);
   fillProfileForm();
 });
 
 //закрытие попапов по нажатию на крестик
 buttonCloseProfile.addEventListener('click', () => {
-  closeForm(profilePopup); 
+  closePopup(profilePopup); 
 }); 
 buttonClosePlace.addEventListener('click', () => {
-  placePopup.querySelector('.popup__form_place').reset(); //очистка формы place при закрытии по крестику
-  closeForm(placePopup); 
+  submitNewPlace.reset(); //очистка формы place при закрытии по крестику
+  closePopup(placePopup); 
 }); 
 buttonCloseImage.addEventListener('click', () => {
-  closeForm(imagePopup); 
+  closePopup(imagePopup); 
 })
 
 
@@ -114,13 +87,13 @@ function profileSubmitHandler (evt) { //ф-я сабмитит форму ред
   evt.preventDefault(); 
   profileName.textContent = inputName.value; 
   profileSpecification.textContent = inputGob.value;
-  closeForm(profilePopup);
+  closePopup(profilePopup);
 }
 
 submitProfile.addEventListener('submit', profileSubmitHandler);
 
 buttonOpenPlacePopup.addEventListener('click', () => {
-  openForm(placePopup);
+  openPopup(placePopup);
 });
 
 function placeSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
@@ -128,9 +101,9 @@ function placeSubmitHandler (evt) { //ф-я сабмитит форму реда
   const newCard = {};
   newCard.name = inputPlace.value; 
   newCard.link = inputLink.value;
-  postingCard(newCard);
-  this.reset();
-  closeForm(placePopup);
+  renderCard(newCard);
+  submitNewPlace.reset();
+  closePopup(placePopup);
 };
 
 submitNewPlace.addEventListener('submit', placeSubmitHandler);
