@@ -50,10 +50,8 @@ const deleteCard = (event) => {
   event.target.closest('.place').remove();
 }
 const openLargeImage =(event) => {
-  const largeImage = document.createElement('img');
-  largeImage.classList.add('popup__large-image');
+  const largeImage = imagePopup.querySelector('.popup__large-image');
   largeImage.src = event.target.src;
-  imagePopup.querySelector('.popup__content').prepend(largeImage);
   largeImage.nextElementSibling.textContent = event.target.parentElement.querySelector('.place__paragraf').textContent;
   openForm(imagePopup);
 }
@@ -109,8 +107,8 @@ buttonClosePlace.addEventListener('click', () => {
 }); 
 buttonCloseImage.addEventListener('click', () => {
   closeForm(imagePopup); 
-  event.target.parentElement.querySelector('.popup__large-image').remove();
 })
+
 
 function profileSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
   evt.preventDefault(); 
