@@ -17,10 +17,9 @@ const profileSpecification = document.querySelector('.profile__specification');
 const profileName = document.querySelector('.profile__title');
 const largeImage = imagePopup.querySelector('.popup__large-image');
 const cardList = document.querySelector('.places');
-
 const toggleLike = (event) => {        
    event.target.classList.toggle('place__like-button_active');
-};
+}
 const deleteCard = (event) => {
   event.target.closest('.place').remove();
 }
@@ -30,8 +29,6 @@ const openLargeImage =(event) => {
   largeImage.nextElementSibling.textContent = event.target.parentElement.querySelector('.place__paragraf').textContent;
   openPopup(imagePopup);
 }
-
-
 const createNewCard = (card) => {  //ф-я принимает на вход элемент массива карточек, возвращая новый элемент для публикации
   const newCard= cardTemplate.querySelector('.place').cloneNode(true); 
   const likeButton = newCard.querySelector('.place__like-button'); 
@@ -48,7 +45,7 @@ const createNewCard = (card) => {  //ф-я принимает на вход эл
 const renderCard = (card) => { //ф-я, получая на вход элемент массива карточек, публикует новую карточку в начало элемента .places
   const renderingCard = createNewCard(card);
   cardList.prepend(renderingCard); 
-};
+}
 
 initialCards.forEach(renderCard); //публикуем первоначальный массив карточек
 
@@ -63,6 +60,15 @@ const fillProfileForm = () => { //заполняем поля профайл-п�
   inputName.value = profileName.textContent;
   inputGob.value = profileSpecification.textContent;
 }
+//Делаешь нодлист из попапов, делаешь из ноды массив, проходишься форичем, на элемент навешиваешь лиснер и пишешь поведение
+
+
+const setEscListener = (popup) =>{
+
+}
+const setOverlayListener= (popup) =>{
+
+}
 
 //добавляем слушатель кнопке "редактировать профиль" для открытия профайл-попапа
 buttonOpenProfile.addEventListener('click', () => {
@@ -74,6 +80,7 @@ buttonOpenProfile.addEventListener('click', () => {
 buttonCloseProfile.addEventListener('click', () => {
   closePopup(profilePopup); 
 }); 
+
 buttonClosePlace.addEventListener('click', () => {
   submitNewPlace.reset(); //очистка формы place при закрытии по крестику
   closePopup(placePopup); 
@@ -81,7 +88,6 @@ buttonClosePlace.addEventListener('click', () => {
 buttonCloseImage.addEventListener('click', () => {
   closePopup(imagePopup); 
 })
-
 
 function profileSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
   evt.preventDefault(); 

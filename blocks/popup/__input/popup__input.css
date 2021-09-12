@@ -14,9 +14,7 @@
   color: #C4C4C4;
   font-family: inherit; 
 }
-.popup__input:invalid {
-  border-bottom: 1px solid #FF0000;
-}
+
 @media (max-width: 625px) {
   .popup__input {
     margin-bottom: 29px;
