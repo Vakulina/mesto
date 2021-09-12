@@ -8,15 +8,13 @@ const config = {
 }; 
 const showInputError = (formElement, inputElement, errorClass, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
-  inputElement.classList.add(errorClass);
+  errorElement.classList.add(errorClass);
   errorElement.textContent =  inputElement.validationMessage;
-  errorElement.classList.add(inputErrorClass);
-  console.log('показать ошибку');
+   console.log('показать ошибку');
 };
 const hideInputError = (formElement, inputElement, errorClass, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
-  inputElement.classList.remove(errorClass);
-  errorElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
   console.log(' скрыть ошибку');
 };
