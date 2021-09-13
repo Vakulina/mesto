@@ -64,9 +64,12 @@ const openPopup = (popup) => {
 }
 
 const closePopup = (popup) => {
-  popup.querySelector('.popup__form').reset();
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscPress);
+  const form = popup.querySelector('.popup__form');
+  if (Boolean(form)) { //исключаем попап, в котором нет формы
+    popup.querySelector('.popup__form').reset();
+  }
 }
 
 const fillProfileForm = () => { //заполняем поля профайл-попапа данными активного пользователя
