@@ -32,7 +32,7 @@ const hasInvalidInputs = (listInputs) => {
 const toogleButtonsState = (config, popup)=>{
   const buttonElement = popup.querySelector(config.submitButtonSelector);
   const listInputs = Array.from(popup.querySelectorAll(config.inputSelector));
-  if(buttonElement&listInputs){ //проверка на то, что в попапе есть инпуты и кнопка
+  if (((Boolean(buttonElement)) === true)&&(listInputs.length > 0))  { //проверка на то, что в попапе есть инпуты и кнопка
     if (hasInvalidInputs(listInputs)){
       buttonElement.classList.add(config.inactiveButtonClass);
     }
