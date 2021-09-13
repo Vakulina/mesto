@@ -49,26 +49,38 @@ const renderCard = (card) => { //ф-я, получая на вход элеме�
 
 initialCards.forEach(renderCard); //публикуем первоначальный массив карточек
 
+
+
+//коллбэк слушателя по закрытию попапов по нажатию esc
+const handleEscPress = (evt)=> {
+  const openedPopup = document.querySelector('.popup_opened');
+    if (evt.key === 'Escape') {
+      closePopup(openedPopup);
+}}
+
+
+
 //объявляем функции открытия и закрытия попапов
 const openPopup = (popup) => {  
+  toogleButtonsState(config, popup);
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscPress);
 }
+
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscPress);
 }
+
+
 const fillProfileForm = () => { //заполняем поля профайл-попапа данными активного пользователя
   inputName.value = profileName.textContent;
   inputGob.value = profileSpecification.textContent;
 }
-//Делаешь нодлист из попапов, делаешь из ноды массив, проходишься форичем, на элемент навешиваешь лиснер и пишешь поведение
 
 
-const setEscListener = (popup) =>{
 
-}
-const setOverlayListener= (popup) =>{
 
-}
 
 //добавляем слушатель кнопке "редактировать профиль" для открытия профайл-попапа
 buttonOpenProfile.addEventListener('click', () => {

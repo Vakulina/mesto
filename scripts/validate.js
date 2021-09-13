@@ -16,7 +16,6 @@ const hideInputError = (formElement, inputElement, errorElement, errorClass, inp
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 }
-
 const checkInputsValidity = (formElement, inputElement, errorClass, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
   if (!inputElement.validity.valid) {
@@ -25,45 +24,43 @@ const checkInputsValidity = (formElement, inputElement, errorClass, inputErrorCl
     hideInputError(formElement, inputElement, errorElement, errorClass, inputErrorClass);
   }
 }
-
 const hasInvalidInputs = (listInputs) => {
  return listInputs.some((inputElement) =>{
     return !inputElement.validity.valid;
   });
 }
-
-const toogleButtonsState = (listInputs, formElement, submitButtonSelector, inactiveButtonClass)=>{
-  const buttonElement = formElement.querySelector(submitButtonSelector);
- 
-  if (hasInvalidInputs(listInputs)){
-    buttonElement.classList.add(inactiveButtonClass);
-  }
-  else {
-    buttonElement.classList.remove(inactiveButtonClass);
+const toogleButtonsState = (config, popup)=>{
+  const buttonElement = popup.querySelector(config.submitButtonSelector);
+  const listInputs = Array.from(popup.querySelectorAll(config.inputSelector));
+  if(buttonElement&listInputs){ //проверка на то, что в попапе есть инпуты и кнопка
+    if (hasInvalidInputs(listInputs)){
+      buttonElement.classList.add(config.inactiveButtonClass);
+    }
+    else {
+      buttonElement.classList.remove(config.inactiveButtonClass);
+    }
   }
 }
-
-const setInputsListeners = (formElement, inputSelector, errorClass, inputErrorClass, submitButtonSelector, inactiveButtonClass)=>{
-  const listInputs= Array.from(formElement.querySelectorAll(inputSelector));
-  listInputs.forEach(inputElement => {
-    inputElement.addEventListener('input', e => {
-      e.preventDefault();
-      checkInputsValidity(formElement, inputElement, errorClass, inputErrorClass);
-      toogleButtonsState(listInputs, formElement, submitButtonSelector, inactiveButtonClass);
-    });
-  })
-}
-const setFormsListeners = (formElement, inputSelector, errorClass, inputErrorClass, submitButtonSelector, inactiveButtonClass)=>{
+const setEventListeners = (config, formElement)=>{
   formElement.addEventListener('submit', e=>{
     e.preventDefault();
   });
-  setInputsListeners(formElement, inputSelector, errorClass, inputErrorClass, submitButtonSelector, inactiveButtonClass); 
+  const listInputs= Array.from(formElement.querySelectorAll(config.inputSelector));
+  listInputs.forEach(inputElement => {
+    inputElement.addEventListener('input', e => {
+      e.preventDefault();
+      checkInputsValidity(formElement, inputElement, config.errorClass, config.inputErrorClass);
+      toogleButtonsState (config, formElement);
+    });
+  });
 }
 const enableValidate = (config) => {
   const listForms = document.querySelectorAll(config.formSelector);
   listForms.forEach((formElement)=>{
-    setFormsListeners(formElement, config.inputSelector, config.errorClass, config.inputErrorClass, config.submitButtonSelector, config.inactiveButtonClass);      
+    setEventListeners(config, formElement);       
   });
 }
 enableValidate(config);
+
+
 
