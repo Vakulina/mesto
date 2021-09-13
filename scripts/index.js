@@ -49,16 +49,12 @@ const renderCard = (card) => { //ф-я, получая на вход элеме�
 
 initialCards.forEach(renderCard); //публикуем первоначальный массив карточек
 
-
-
 //коллбэк слушателя по закрытию попапов по нажатию esc
 const handleEscPress = (evt)=> {
   const openedPopup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
       closePopup(openedPopup);
 }}
-
-
 
 //объявляем функции открытия и закрытия попапов
 const openPopup = (popup) => {  
@@ -68,24 +64,20 @@ const openPopup = (popup) => {
 }
 
 const closePopup = (popup) => {
+  popup.querySelector('.popup__form').reset();
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscPress);
 }
-
 
 const fillProfileForm = () => { //заполняем поля профайл-попапа данными активного пользователя
   inputName.value = profileName.textContent;
   inputGob.value = profileSpecification.textContent;
 }
 
-
-
-
-
 //добавляем слушатель кнопке "редактировать профиль" для открытия профайл-попапа
 buttonOpenProfile.addEventListener('click', () => {
-  openPopup(profilePopup);
   fillProfileForm();
+  openPopup(profilePopup);
 });
 
 //закрытие попапов по нажатию на крестик
@@ -94,7 +86,6 @@ buttonCloseProfile.addEventListener('click', () => {
 }); 
 
 buttonClosePlace.addEventListener('click', () => {
-  submitNewPlace.reset(); //очистка формы place при закрытии по крестику
   closePopup(placePopup); 
 }); 
 buttonCloseImage.addEventListener('click', () => {
@@ -120,8 +111,23 @@ function placeSubmitHandler (evt) { //ф-я сабмитит форму реда
   newCard.name = inputPlace.value; 
   newCard.link = inputLink.value;
   renderCard(newCard);
-  submitNewPlace.reset();
   closePopup(placePopup);
 };
 
 submitNewPlace.addEventListener('submit', placeSubmitHandler);
+const listPopups= Array.from(document.querySelectorAll('.popup'));
+listPopups.forEach( (popup)=> {
+
+//навесим слушатель на попап, закрывающий попап по щелчку на оверлей
+const listChildren = Array.from(popup.children);
+
+listChildren.forEach( (children)=> {
+  children.addEventListener('mousedown', (evt) => {
+    evt.stopPropagation();
+  });
+});
+  popup.addEventListener('mousedown', (evt)=>{
+    evt.preventDefault();
+    closePopup(popup);
+  });
+});

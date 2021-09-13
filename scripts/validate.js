@@ -25,14 +25,15 @@ const checkInputsValidity = (formElement, inputElement, errorClass, inputErrorCl
   }
 }
 const hasInvalidInputs = (listInputs) => {
- return listInputs.some((inputElement) =>{
+ return listInputs.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 }
 const toogleButtonsState = (config, popup)=>{
   const buttonElement = popup.querySelector(config.submitButtonSelector);
   const listInputs = Array.from(popup.querySelectorAll(config.inputSelector));
-  if (((Boolean(buttonElement)) === true)&&(listInputs.length > 0))  { //проверка на то, что в попапе есть инпуты и кнопка
+  if ((Boolean(buttonElement)) === true)  { //проверка на то, что в попапе есть кнопка
+    
     if (hasInvalidInputs(listInputs)){
       buttonElement.classList.add(config.inactiveButtonClass);
     }
@@ -41,22 +42,22 @@ const toogleButtonsState = (config, popup)=>{
     }
   }
 }
-const setEventListeners = (config, formElement)=>{
-  formElement.addEventListener('submit', e=>{
-    e.preventDefault();
+const setEventListeners = (config, formElement) => {
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
   });
   const listInputs= Array.from(formElement.querySelectorAll(config.inputSelector));
   listInputs.forEach(inputElement => {
-    inputElement.addEventListener('input', e => {
-      e.preventDefault();
+    inputElement.addEventListener('input', (evt) => {
+      evt.preventDefault();
       checkInputsValidity(formElement, inputElement, config.errorClass, config.inputErrorClass);
-      toogleButtonsState (config, formElement);
+      toogleButtonsState(config, formElement);
     });
   });
 }
 const enableValidate = (config) => {
   const listForms = document.querySelectorAll(config.formSelector);
-  listForms.forEach((formElement)=>{
+  listForms.forEach((formElement) => {
     setEventListeners(config, formElement);       
   });
 }
