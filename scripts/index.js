@@ -63,7 +63,6 @@ const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscPress);
 }
-
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscPress);
@@ -72,33 +71,36 @@ const closePopup = (popup) => {
     popup.querySelector('.popup__form').reset();
   }
 }
-
-const fillProfileForm = () => { //заполняем поля профайл-попапа данными активного пользователя
-  inputName.value = profileName.textContent;
-  inputGob.value = profileSpecification.textContent;
+const fillForm = (arr) =>{
+  arr.forEach( (arrElement) =>{
+    arrElement.element.value = arrElement.content;
+  })
 }
 
 //добавляем слушатель кнопке "редактировать профиль" для открытия профайл-попапа
 buttonOpenProfile.addEventListener('click', () => {
-  fillProfileForm();
+  fillForm([{element: inputName,
+                content: profileName.textContent},
+              { element: inputGob,
+                content: profileSpecification.textContent}]);
   openPopup(profilePopup);
-});
+})
 
 //закрытие попапов по нажатию на крестик
 buttonCloseProfile.addEventListener('click', () => {
   closePopup(profilePopup);
-});
+})
 
 buttonClosePlace.addEventListener('click', () => {
   closePopup(placePopup);
-});
+})
 buttonCloseImage.addEventListener('click', () => {
   closePopup(imagePopup);
 })
 
-function profileSubmitHandler(evt) { //ф-я сабмитит форму редактирования профайла
-  evt.preventDefault();
-  profileName.textContent = inputName.value;
+function profileSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
+  evt.preventDefault(); 
+  profileName.textContent = inputName.value; 
   profileSpecification.textContent = inputGob.value;
   closePopup(profilePopup);
 }
@@ -109,10 +111,10 @@ buttonOpenPlacePopup.addEventListener('click', () => {
   openPopup(placePopup);
 });
 
-function placeSubmitHandler(evt) { //ф-я сабмитит форму редактирования профайла
-  evt.preventDefault();
+function placeSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
+  evt.preventDefault(); 
   const newCard = {};
-  newCard.name = inputPlace.value;
+  newCard.name = inputPlace.value; 
   newCard.link = inputLink.value;
   renderCard(newCard);
   closePopup(placePopup);

@@ -5,7 +5,7 @@ const config = {
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
-};
+}
 const showInputError = (inputElement, errorElement, errorClass, inputErrorClass) => {
   inputElement.classList.add(inputErrorClass);
   errorElement.classList.add(errorClass);
@@ -20,7 +20,8 @@ const checkInputsValidity = (formElement, inputElement, errorClass, inputErrorCl
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
   if (!inputElement.validity.valid) {
     showInputError(inputElement, errorElement, errorClass, inputErrorClass);
-  } else {
+  } 
+  else {
     hideInputError(inputElement, errorElement, errorClass, inputErrorClass);
   }
 }
