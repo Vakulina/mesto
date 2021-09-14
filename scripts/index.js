@@ -1,4 +1,4 @@
-const profilePopup = document.querySelector('.popup_type_profile'); 
+const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
 const imagePopup = document.querySelector('.popup_type_image');
 const buttonOpenProfile = document.querySelector('.profile__open-popup');
@@ -17,47 +17,48 @@ const profileSpecification = document.querySelector('.profile__specification');
 const profileName = document.querySelector('.profile__title');
 const largeImage = imagePopup.querySelector('.popup__large-image');
 const cardList = document.querySelector('.places');
-const toggleLike = (event) => {        
-   event.target.classList.toggle('place__like-button_active');
+const toggleLike = (event) => {
+  event.target.classList.toggle('place__like-button_active');
 }
 const deleteCard = (event) => {
   event.target.closest('.place').remove();
 }
-const openLargeImage =(event) => {
+const openLargeImage = (event) => {
   largeImage.src = event.target.src;
   largeImage.alt = event.target.parentElement.querySelector('.place__paragraf').textContent;
   largeImage.nextElementSibling.textContent = event.target.parentElement.querySelector('.place__paragraf').textContent;
   openPopup(imagePopup);
 }
 const createNewCard = (card) => {  //ф-я принимает на вход элемент массива карточек, возвращая новый элемент для публикации
-  const newCard= cardTemplate.querySelector('.place').cloneNode(true); 
-  const likeButton = newCard.querySelector('.place__like-button'); 
+  const newCard = cardTemplate.querySelector('.place').cloneNode(true);
+  const likeButton = newCard.querySelector('.place__like-button');
   const buttonTrashPlace = newCard.querySelector('.place__trash-button');
   const imgOpening = newCard.querySelector('.place__img');
-  newCard.querySelector('.place__img').src = card.link; 
+  newCard.querySelector('.place__img').src = card.link;
   newCard.querySelector('.place__paragraf').textContent = card.name;
   imgOpening.alt = `Фото пользователя: ${card.name}`;
-  likeButton.addEventListener('click', toggleLike); 
-  buttonTrashPlace.addEventListener('click', deleteCard); 
+  likeButton.addEventListener('click', toggleLike);
+  buttonTrashPlace.addEventListener('click', deleteCard);
   imgOpening.addEventListener('click', openLargeImage);
   return newCard;
 }
 const renderCard = (card) => { //ф-я, получая на вход элемент массива карточек, публикует новую карточку в начало элемента .places
   const renderingCard = createNewCard(card);
-  cardList.prepend(renderingCard); 
+  cardList.prepend(renderingCard);
 }
 
 initialCards.forEach(renderCard); //публикуем первоначальный массив карточек
 
 //коллбэк слушателя по закрытию попапов по нажатию esc
-const handleEscPress = (evt)=> {
+const handleEscPress = (evt) => {
   const openedPopup = document.querySelector('.popup_opened');
-    if (evt.key === 'Escape') {
-      closePopup(openedPopup);
-}}
+  if (evt.key === 'Escape') {
+    closePopup(openedPopup);
+  }
+}
 
 //объявляем функции открытия и закрытия попапов
-const openPopup = (popup) => {  
+const openPopup = (popup) => {
   toogleButtonsState(config, popup);
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscPress);
@@ -85,19 +86,19 @@ buttonOpenProfile.addEventListener('click', () => {
 
 //закрытие попапов по нажатию на крестик
 buttonCloseProfile.addEventListener('click', () => {
-  closePopup(profilePopup); 
-}); 
+  closePopup(profilePopup);
+});
 
 buttonClosePlace.addEventListener('click', () => {
-  closePopup(placePopup); 
-}); 
+  closePopup(placePopup);
+});
 buttonCloseImage.addEventListener('click', () => {
-  closePopup(imagePopup); 
+  closePopup(imagePopup);
 })
 
-function profileSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
-  evt.preventDefault(); 
-  profileName.textContent = inputName.value; 
+function profileSubmitHandler(evt) { //ф-я сабмитит форму редактирования профайла
+  evt.preventDefault();
+  profileName.textContent = inputName.value;
   profileSpecification.textContent = inputGob.value;
   closePopup(profilePopup);
 }
@@ -108,29 +109,28 @@ buttonOpenPlacePopup.addEventListener('click', () => {
   openPopup(placePopup);
 });
 
-function placeSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
-  evt.preventDefault(); 
+function placeSubmitHandler(evt) { //ф-я сабмитит форму редактирования профайла
+  evt.preventDefault();
   const newCard = {};
-  newCard.name = inputPlace.value; 
+  newCard.name = inputPlace.value;
   newCard.link = inputLink.value;
   renderCard(newCard);
   closePopup(placePopup);
 };
 
 submitNewPlace.addEventListener('submit', placeSubmitHandler);
-const listPopups= Array.from(document.querySelectorAll('.popup'));
-listPopups.forEach( (popup)=> {
+const listPopups = Array.from(document.querySelectorAll('.popup'));
+listPopups.forEach((popup) => {
 
-//навесим слушатель на попап, закрывающий попап по щелчку на оверлей
-const listChildren = Array.from(popup.children);
+  //навесим слушатель на попап, закрывающий попап по щелчку на оверлей
+  const childrenElement = popup.firstElementChild;
 
-listChildren.forEach( (children)=> {
-  children.addEventListener('mousedown', (evt) => {
+  childrenElement.addEventListener('mousedown', (evt) => {
     evt.stopPropagation();
   });
-});
-  popup.addEventListener('mousedown', (evt)=>{
+  popup.addEventListener('mousedown', (evt) => {
     evt.preventDefault();
     closePopup(popup);
   });
-});
+})
+enableValidate(config);
