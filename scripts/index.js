@@ -59,7 +59,7 @@ const handleEscPress = (evt) => {
 
 //объявляем функции открытия и закрытия попапов
 const openPopup = (popup) => {
-  toogleButtonsState(config, popup);
+  //toogleButtonsState(config, popup);
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscPress);
 }
@@ -135,4 +135,10 @@ listPopups.forEach((popup) => {
     closePopup(popup);
   });
 })
-enableValidate(config);
+const listForms = document.querySelectorAll('.popup__form');
+
+listForms.forEach((item) => {
+ const check= new FormValidator(config, item);
+ check._setEventListeners();
+});
+

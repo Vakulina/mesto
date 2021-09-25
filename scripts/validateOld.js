@@ -6,6 +6,7 @@ const config = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 }
+
 const showInputError = (inputElement, errorElement, errorClass, inputErrorClass) => {
   inputElement.classList.add(inputErrorClass);
   errorElement.classList.add(errorClass);
@@ -16,6 +17,7 @@ const hideInputError = (inputElement, errorElement, errorClass, inputErrorClass)
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 }
+
 const checkInputsValidity = (formElement, inputElement, errorClass, inputErrorClass) => {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
   if (!inputElement.validity.valid) {
@@ -55,13 +57,5 @@ const setEventListeners = (config, formElement) => {
     });
   });
 }
-const enableValidate = (config) => {
-  const listForms = document.querySelectorAll(config.formSelector);
-  listForms.forEach((formElement) => {
-    setEventListeners(config, formElement);
-  });
-}
-
-
 
 
