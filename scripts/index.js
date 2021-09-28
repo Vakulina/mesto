@@ -12,11 +12,13 @@ const inputName = document.querySelector('.popup__input_type_name');
 const inputGob = document.querySelector('.popup__input_type_specification');
 const inputPlace = document.querySelector('.popup__input_type_place');
 const inputLink = document.querySelector('.popup__input_type_link');
-const cardTemplate = document.getElementById('place-card').content; //выбираем контейтер template с шаблоном карточки
+//const cardTemplate = document.getElementById('place-card').content; //выбираем контейтер template с шаблоном карточки
 const profileSpecification = document.querySelector('.profile__specification');
 const profileName = document.querySelector('.profile__title');
 const largeImage = imagePopup.querySelector('.popup__large-image');
 const cardList = document.querySelector('.places');
+/*
+
 const toggleLike = (event) => {
   event.target.classList.toggle('place__like-button_active');
 }
@@ -31,12 +33,13 @@ const openLargeImage = (event) => {
 }
 const createNewCard = (card) => {  //ф-я принимает на вход элемент массива карточек, возвращая новый элемент для публикации
   const newCard = cardTemplate.querySelector('.place').cloneNode(true);
+  
   const likeButton = newCard.querySelector('.place__like-button');
   const buttonTrashPlace = newCard.querySelector('.place__trash-button');
   const imgOpening = newCard.querySelector('.place__img');
-  newCard.querySelector('.place__img').src = card.link;
-  newCard.querySelector('.place__paragraf').textContent = card.name;
-  imgOpening.alt = `Фото пользователя: ${card.name}`;
+ // newCard.querySelector('.place__img').src = card.link;
+ // newCard.querySelector('.place__paragraf').textContent = card.name;
+  //imgOpening.alt = `Фото пользователя: ${card.name}`;
   likeButton.addEventListener('click', toggleLike);
   buttonTrashPlace.addEventListener('click', deleteCard);
   imgOpening.addEventListener('click', openLargeImage);
@@ -48,6 +51,18 @@ const renderCard = (card) => { //ф-я, получая на вход элеме�
 }
 
 initialCards.forEach(renderCard); //публикуем первоначальный массив карточек
+
+*/
+
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item, 'place-card');
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+  // Добавляем в DOM
+  document.querySelector('.places').prepend(cardElement);
+}); 
+
 
 //коллбэк слушателя по закрытию попапов по нажатию esc
 const handleEscPress = (evt) => {
@@ -161,4 +176,6 @@ listForms.forEach((item) => {
   const oneFormValidator = new FormValidator(config, item);
   oneFormValidator.enableValidation();
 });
+
+
 
