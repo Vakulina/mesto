@@ -59,30 +59,50 @@ const handleEscPress = (evt) => {
 
 //объявляем функции открытия и закрытия попапов
 const openPopup = (popup) => {
-  //toogleButtonsState(config, popup);
+
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscPress);
 }
+const resetInputs = (form) => {
+  const listInputs = Array.from(form.querySelectorAll('.popup__input'));
+  listInputs.forEach((arrElement) => {
+    arrElement.value = '';
+    if (arrElement.classList.contains('popup__input_type_error')) {
+      arrElement.nextElementSibling.classList.remove('popup__error_visible');
+      arrElement.classList.remove('popup__input_type_error');
+    }
+  });
+}
+
+
 const closePopup = (popup) => {
+
+  const form = popup.querySelector('.popup__form');
+
+  if (Boolean(form)) { //исключаем попап, в котором нет формы
+    resetInputs(form);
+    form.reset();
+  }
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscPress);
-  const form = popup.querySelector('.popup__form');
-  if (Boolean(form)) { //исключаем попап, в котором нет формы
-    popup.querySelector('.popup__form').reset();
-  }
+
 }
-const fillForm = (arr) =>{
-  arr.forEach( (arrElement) =>{
+const fillForm = (arr) => {
+  arr.forEach((arrElement) => {
     arrElement.element.value = arrElement.content;
   })
 }
 
 //добавляем слушатель кнопке "редактировать профиль" для открытия профайл-попапа
 buttonOpenProfile.addEventListener('click', () => {
-  fillForm([{element: inputName,
-                content: profileName.textContent},
-              { element: inputGob,
-                content: profileSpecification.textContent}]);
+  fillForm([{
+    element: inputName,
+    content: profileName.textContent
+  },
+  {
+    element: inputGob,
+    content: profileSpecification.textContent
+  }]);
   openPopup(profilePopup);
 })
 
@@ -98,9 +118,9 @@ buttonCloseImage.addEventListener('click', () => {
   closePopup(imagePopup);
 })
 
-function profileSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
-  evt.preventDefault(); 
-  profileName.textContent = inputName.value; 
+function profileSubmitHandler(evt) { //ф-я сабмитит форму редактирования профайла
+  evt.preventDefault();
+  profileName.textContent = inputName.value;
   profileSpecification.textContent = inputGob.value;
   closePopup(profilePopup);
 }
@@ -111,10 +131,10 @@ buttonOpenPlacePopup.addEventListener('click', () => {
   openPopup(placePopup);
 });
 
-function placeSubmitHandler (evt) { //ф-я сабмитит форму редактирования профайла
-  evt.preventDefault(); 
+function placeSubmitHandler(evt) { //ф-я сабмитит форму редактирования профайла
+  evt.preventDefault();
   const newCard = {};
-  newCard.name = inputPlace.value; 
+  newCard.name = inputPlace.value;
   newCard.link = inputLink.value;
   renderCard(newCard);
   closePopup(placePopup);
@@ -138,7 +158,7 @@ listPopups.forEach((popup) => {
 const listForms = document.querySelectorAll('.popup__form');
 
 listForms.forEach((item) => {
- const check= new FormValidator(config, item);
- check._setEventListeners();
+  const oneFormValidator = new FormValidator(config, item);
+  oneFormValidator.enableValidation();
 });
 
