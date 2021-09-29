@@ -1,6 +1,5 @@
-
-
-class Card {
+import {openPopup, imagePopup} from './index.js';
+export class Card {
   // в конструкторе будут динамические данные,
   // для каждого экземпляра свои
   constructor(data, templateSelector) {
@@ -8,6 +7,7 @@ class Card {
       this._link = data.link;
       this._templateSelector = templateSelector;
 }
+
   _getTemplate() {
      // забираем разметку из HTML и клонируем элемент
     const cardElement= document.getElementById(this._templateSelector).content.querySelector('.place').cloneNode(true);
@@ -18,12 +18,16 @@ class Card {
   _setEventListeners() {
     this._likeButton = this._element.querySelector('.place__like-button');
     this._deleteCardButton = this._element.querySelector('.place__trash-button');
+    this._imageElement = this._element.querySelector('.place__img');
     this._likeButton.addEventListener('click', ()=> {
       this._handletoggleLike();
     });
     this._deleteCardButton.addEventListener('click', () =>{
       this._handDeleteCard();
     });
+    this._imageElement.addEventListener('click', () =>{
+      this._handleOpenLargeImage();
+    })   
   }
 
   _handletoggleLike() {
@@ -32,6 +36,14 @@ class Card {
 
   _handDeleteCard() {
     this._deleteCardButton.closest('.place').remove();
+  }
+
+  _handleOpenLargeImage = () => {
+    this._largeImage = document.querySelector('.popup__large-image');
+    this._largeImage.src = this._link;
+    this._largeImage.alt = this._text;
+    this._largeImage.nextElementSibling.textContent = this._text;
+    openPopup(imagePopup);
   }
 
   generateCard() {
