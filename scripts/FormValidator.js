@@ -66,7 +66,6 @@ export class FormValidator {
     this._setEventListeners();
   }
 
-
   _setEventListeners() {
     this._listInputs.forEach(inputElement => {
       inputElement.addEventListener('input', (evt) => {

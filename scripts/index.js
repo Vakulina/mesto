@@ -1,6 +1,6 @@
-import {FormValidator } from './FormValidator.js';
-import {config, initialCards} from './data.js';
-import {Card} from './Card.js';
+import { FormValidator } from './FormValidator.js';
+import { config, initialCards } from './data.js';
+import { Card } from './Card.js';
 const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
 const imagePopup = document.querySelector('.popup_type_image');
@@ -18,7 +18,7 @@ const inputLink = document.querySelector('.popup__input_type_link');
 const profileSpecification = document.querySelector('.profile__specification');
 const profileName = document.querySelector('.profile__title');
 
-const renderCard = (item) =>{
+const renderCard = (item) => {
   // Создадим экземпляр карточки
   const card = new Card(item, 'place-card');
   // Создаём карточку и возвращаем наружу
@@ -29,7 +29,7 @@ const renderCard = (item) =>{
 
 initialCards.forEach((item) => {
   renderCard(item);
-}); 
+});
 
 //коллбэк слушателя по закрытию попапов по нажатию esc
 const handleEscPress = (evt) => {
@@ -41,9 +41,9 @@ const handleEscPress = (evt) => {
 
 //объявляем функции открытия и закрытия попапов
 const openPopup = (popup) => {
-  if(popup.classList.contains('popup_type_profile')){
+  if (popup.classList.contains('popup_type_profile')) {
     profileFormValidator.validateOpenPopup()
-  }; 
+  };
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscPress);
 }
@@ -147,6 +147,4 @@ placeFormValidator.enableValidation();
 const profileFormValidator = new FormValidator(config, profilePopup);
 profileFormValidator.enableValidation();
 
-export {openPopup, imagePopup}
-
-
+export { openPopup, imagePopup }
