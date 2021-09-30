@@ -1,4 +1,4 @@
-import { openPopup, imagePopup } from './index.js';
+import { openPopup, imagePopup, largeImage, captionImage } from './index.js';
 export class Card {
   // в конструкторе будут динамические данные,
   // для каждого экземпляра свои
@@ -39,10 +39,9 @@ export class Card {
   }
 
   _handleOpenLargeImage = () => {
-    this._largeImage = document.querySelector('.popup__large-image');
-    this._largeImage.src = this._link;
-    this._largeImage.alt = this._text;
-    this._largeImage.nextElementSibling.textContent = this._text;
+    largeImage.src = this._link;
+    largeImage.alt = this._text;
+    captionImage.textContent = this._text;
     openPopup(imagePopup);
   }
 
