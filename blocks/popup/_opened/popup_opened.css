@@ -7,5 +7,5 @@
 }
 @keyframes layout {
   from { z-index: -1; }
-  to {  z-index: 200 };
+  to {  z-index: 200; }
  }
