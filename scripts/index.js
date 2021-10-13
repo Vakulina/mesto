@@ -1,6 +1,7 @@
 import { FormValidator } from './FormValidator.js';
 import { config, initialCards } from './data.js';
 import { Card } from './Card.js';
+import Section from './Section.js';
 const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
 const imagePopup = document.querySelector('.popup_type_image');
