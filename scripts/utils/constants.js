@@ -33,4 +33,11 @@ const config = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 }
-export { initialCards, config };
+const cardsTemplateSelector = 'place-card';
+const containerSelector = '.places';
+const profileSelector = '.popup_type_profile';
+const placeSelector = '.popup_type_place';
+const imageSelector = '.popup_type_image';
+
+
+export { initialCards, config, cardsTemplateSelector, containerSelector, imageSelector, placeSelector, profileSelector};

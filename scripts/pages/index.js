@@ -1,7 +1,8 @@
-import { FormValidator } from './FormValidator.js';
-import { config, initialCards } from './data.js';
-import { Card } from './Card.js';
-import Section from './Section.js';
+import { FormValidator } from '../FormValidator.js';
+import { config, initialCards, cardsTemplateSelector, containerSelector, imageSelector, placeSelector, profileSelector } from '../utils/constants.js';
+import { Card } from '../Card.js';
+import Section from '../Section.js';
+import Popup from '../Popup.js';
 const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
 const imagePopup = document.querySelector('.popup_type_image');
@@ -18,7 +19,7 @@ const inputPlace = document.querySelector('.popup__input_type_place');
 const inputLink = document.querySelector('.popup__input_type_link');
 const profileSpecification = document.querySelector('.profile__specification');
 const profileName = document.querySelector('.profile__title');
-const placeSection =  document.querySelector('.places');
+const placeSection = document.querySelector('.places');
 const largeImage = imagePopup.querySelector('.popup__large-image');
 const captionImage = imagePopup.querySelector('.popup__subtitle');
 
@@ -28,13 +29,34 @@ placeFormValidator.enableValidation();
 const profileFormValidator = new FormValidator(config, formEditProfile);
 profileFormValidator.enableValidation();
 
-//коллбэк слушателя по закрытию попапов по нажатию esc
-const handleEscPress = (evt) => {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_opened');
-    closePopup(openedPopup);
+
+
+//первоначальная инициализация карточек на странице
+const cardsList = new Section({
+  items: initialCards,
+
+  renderer: (item) => {
+    const card = new Card(item, cardsTemplateSelector );
+    const cardElement = card.generateCard();
+    cardsList.addItem(cardElement);
   }
-}
+
+  }, containerSelector);
+
+cardsList.renderItems()
+
+
+
+
+
+
+
+
+/*
+
+
+//коллбэк слушателя по закрытию попапов по нажатию esc
+
 
 //объявляем функции открытия и закрытия попапов
 const openPopup = (popup) => {
@@ -51,7 +73,7 @@ const resetInputs = (popup) => {//очистка значений полей п�
   const listInputs = Array.from(popup.querySelectorAll('.popup__input'));
   listInputs.forEach((arrElement) => {
     arrElement.value = '';
-    placeFormValidator.hideInputError(arrElement); 
+    placeFormValidator.hideInputError(arrElement);
   });
 }
 
@@ -86,17 +108,17 @@ formEditProfile.addEventListener('submit', handleSubmitProfile);
 buttonOpenPlacePopup.addEventListener('click', () => {
   formNewPlace.reset();
   resetInputs(placePopup);
-  placeFormValidator.toogleButtonsState(); 
-  openPopup(placePopup); 
+  placeFormValidator.toogleButtonsState();
+  openPopup(placePopup);
 });
 
 
 const createCard = (item) => {
   // Создадим экземпляр карточки
-  const card = new Card(item, 'place-card');
-  // Создаём карточку и возвращаем наружу
-  const cardElement = card.generateCard();
-  return cardElement;
+          const card = new Card(item, 'place-card');
+          // Создаём карточку и возвращаем наружу
+          const cardElement = card.generateCard();
+          return cardElement;
 }
 const renderCard=(cardElement)=>{
   // Добавляем в DOM
@@ -126,7 +148,8 @@ listPopups.forEach((popup) => {
     if(evt.target.classList.contains('popup_opened')) {
       closePopup(popup);
     }
-  }); 
+  });
 })
 
 export { openPopup, imagePopup, largeImage, captionImage }
+*/

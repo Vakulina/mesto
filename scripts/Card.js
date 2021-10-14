@@ -1,10 +1,12 @@
-import { openPopup, imagePopup, largeImage, captionImage } from './index.js';
+//import { openPopup, imagePopup, largeImage, captionImage } from './pages/index.js';
+
+
+
 export class Card {
-  // в конструкторе будут динамические данные,
-  // для каждого экземпляра свои
   constructor(data, templateSelector) {
     this._text = data.name;
     this._link = data.link;
+   // this._handleCardClick=handleCardClick;
     this._templateSelector = templateSelector;
   }
 
@@ -58,6 +60,11 @@ export class Card {
 
     // Вернём элемент наружу
     return this._element;
+    console.log(this._element);
   }
 }
 
+
+
+//Свяжите класс `Card` c попапом. Сделайте так, чтобы Card принимал в конструктор функцию 
+//`handleCardClick`. Эта функция должна открывать попап с картинкой при клике на карточку.
