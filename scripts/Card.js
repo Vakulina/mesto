@@ -1,14 +1,14 @@
 //import { openPopup, imagePopup, largeImage, captionImage } from './pages/index.js';
 
 
-
 export class Card {
-  constructor(data, templateSelector) {
+  constructor({data, handleCardClick}, templateSelector) {
     this._text = data.name;
     this._link = data.link;
-   // this._handleCardClick=handleCardClick;
+    this._handleCardClick = handleCardClick;
     this._templateSelector = templateSelector;
   }
+
 
   _getTemplate() {
     // забираем разметку из HTML и клонируем элемент
@@ -28,9 +28,11 @@ export class Card {
       this._handDeleteCard();
     });
     this._imageElement.addEventListener('click', () => {
-      this._handleOpenLargeImage();
+      this._handleCardClick();
     })
   }
+
+
 
   _handletoggleLike() {
     this._likeButton.classList.toggle('place__like-button_active');
@@ -46,7 +48,6 @@ export class Card {
     captionImage.textContent = this._text;
     openPopup(imagePopup);
   }
-
   generateCard() {
     // Запишем разметку в приватное поле _element. 
     // Так у других элементов появится доступ к ней.
@@ -60,11 +61,20 @@ export class Card {
 
     // Вернём элемент наружу
     return this._element;
-    console.log(this._element);
+
   }
 }
 
 
-
-//Свяжите класс `Card` c попапом. Сделайте так, чтобы Card принимал в конструктор функцию 
+/*Свяжите класс `Card` c попапом. Сделайте так, чтобы Card принимал в конструктор функцию 
 //`handleCardClick`. Эта функция должна открывать попап с картинкой при клике на карточку.
+const handleCardClick = ()=>{
+ 
+  popupWithImage.open.bind(popupWithImage);
+
+  popupWithImage.
+  this._handleCardClick({
+      src: this._img.src,
+      title: this._img.title
+  })
+}*/

@@ -3,9 +3,10 @@ import { config, initialCards, cardsTemplateSelector, containerSelector, imageSe
 import { Card } from '../Card.js';
 import Section from '../Section.js';
 import Popup from '../Popup.js';
+import PopupWithImage from '../PopupWithImage.js'
 const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
-const imagePopup = document.querySelector('.popup_type_image');
+
 const buttonOpenProfile = document.querySelector('.profile__open-popup');
 const buttonCloseProfile = document.querySelector('.popup__reset-button_type_profile');
 const buttonClosePlace = document.querySelector('.popup__reset-button_type_place');
@@ -20,8 +21,7 @@ const inputLink = document.querySelector('.popup__input_type_link');
 const profileSpecification = document.querySelector('.profile__specification');
 const profileName = document.querySelector('.profile__title');
 const placeSection = document.querySelector('.places');
-const largeImage = imagePopup.querySelector('.popup__large-image');
-const captionImage = imagePopup.querySelector('.popup__subtitle');
+
 
 const placeFormValidator = new FormValidator(config, formNewPlace);
 placeFormValidator.enableValidation();
@@ -31,12 +31,21 @@ profileFormValidator.enableValidation();
 
 
 
+
+const imagePopup= new PopupWithImage('.popup_type_image');
+imagePopup.setEventListeners();
+
 //первоначальная инициализация карточек на странице
 const cardsList = new Section({
   items: initialCards,
 
   renderer: (item) => {
-    const card = new Card(item, cardsTemplateSelector );
+    const card = new Card({data:item,
+                          handleCardClick: () => {
+                            imagePopup.open(item.link,item.name,  item.name);
+                          }
+                          
+              },  cardsTemplateSelector );
     const cardElement = card.generateCard();
     cardsList.addItem(cardElement);
   }
