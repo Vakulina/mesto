@@ -33,7 +33,7 @@
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button class="popup__reset-button popup__reset-button_type_profile" type="button"></button>
-      <form class="popup__form popup__form_profile" name="profile__form" novalidate>
+      <form id="profile-form" class="popup__form popup__form_profile" name="profile__form" novalidate>
         <input class="popup__input popup__input_type_name" name="name" type="text" placeholder="Ваше имя" minlength="2" maxlength="40" required >
         <span class="popup__error" id="name-error">Вы пропустили это поле</span>
         <input class="popup__input popup__input_type_specification" name="specification" type="text" placeholder="Ваша специальность" minlength="2" maxlength="200" required >
@@ -46,11 +46,11 @@
     <div class="popup__container">
       <h2 class="popup__title">Новое место</h2>
       <button class="popup__reset-button popup__reset-button_type_place" type="button"></button>
-      <form class="popup__form popup__form_place" name="place__form" novalidate>
+      <form id="new-place-form" class="popup__form popup__form_place" name="place__form" novalidate>
         <input class="popup__input popup__input_type_place" name="place" type="text" placeholder="Название" minlength="2" maxlength="30" required>
-        <span class="popup__error" id="place-error">Вы пропустили это поле</span>
+        <span class="popup__error popup__error_visible" id="place-error">Вы пропустили это поле</span>
         <input class="popup__input popup__input_type_link" name="link" type="url" placeholder="Ссылка на картинку" required>
-        <span class="popup__error" id="link-error">Введите адрес сайта</span>
+        <span class="popup__error popup__error_visible" id="link-error">Введите адрес сайта</span>
         <button class="popup__submit-button popup__submit-button_disabled" type="submit">Создать</button>
       </form>
     </div>

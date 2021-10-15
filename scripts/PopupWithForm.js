@@ -15,19 +15,23 @@ return  this._contentList;
 }
 setEventListeners(){
 
-  this._popup.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+  this._form.addEventListener('submit', (evt) => {
+
     this._getInputValues();
     this._handleFormSubmit(this._contentList);
     this.close()}
     );
   super.setEventListeners();
 }
+open(){
+  console.log(this._form);
+  super.open()
+}
   close(){
-    this._getInputValues()
-    console.log(this._contentList)
-    this._form.reset();
+
     super.close();
+    this._form.reset();
+  
   }
 }
 /*

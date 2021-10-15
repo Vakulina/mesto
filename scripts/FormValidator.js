@@ -15,8 +15,10 @@ export class FormValidator {
     this._errorElement.classList.add(this._errorClass);
     this._errorElement.textContent = inputElement.validationMessage;
   }
-  hideInputError = ( inputElement) => {
+  _hideInputError = (inputElement) => {
+  
     this._errorElement = this._formElement.querySelector(`#${inputElement.name}-error`);
+    
     inputElement.classList.remove(this._inputErrorClass);
     this._errorElement.classList.remove(this._errorClass);
     this._errorElement.textContent = '';
@@ -28,7 +30,7 @@ export class FormValidator {
       this._showInputError(inputElement);
     }
     else {
-      this.hideInputError(inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
@@ -38,10 +40,16 @@ export class FormValidator {
       return !inputElement.validity.valid;
     });
   }
+ _hasEmptyInput(){
+  return this._listInputs.every(inputElement => {
+    return inputElement.validity.length === 0;
+ })}
+ 
 
-  toogleButtonsState() {
 
-    if (this._hasInvalidInputs()) {
+_toogleButtonsState() {
+
+    if ((this._hasInvalidInputs())||(this._hasEmptyInput())) {
       this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.disabled = true; 
     }
@@ -51,15 +59,18 @@ export class FormValidator {
     }
   }
 
+  resetValidation() {
+    this._toogleButtonsState();
+    this._listInputs.forEach(inputElement => {
+        this._hideInputError(inputElement);
+    });
+     }
+
+
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this.toogleButtonsState();
-
-    });
-    this._formElement.addEventListener('reset', (evt) => {
-      evt.preventDefault();
- 
+      this._toogleButtonsState();
     });
     this._setEventListeners();
   }
@@ -69,7 +80,7 @@ export class FormValidator {
       inputElement.addEventListener('input', (evt) => {
         evt.preventDefault();
         this._checkInputsValidity(inputElement);
-        this.toogleButtonsState();
+        this._toogleButtonsState();
       });
     });
   }

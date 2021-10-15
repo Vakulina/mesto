@@ -66,6 +66,7 @@ cardsList.renderItems()
 const handlePlaceFormSubmit = (arr) => {
 
   cardsList.addItem(createCard({name:arr[0], link:arr[1]}));
+
     }
 
 
@@ -81,7 +82,10 @@ const placeOpenedPopup= new PopupWithForm('.popup_type_place', handlePlaceFormSu
 
 placeOpenedPopup.setEventListeners()
 document.querySelector('.profile__adding-button').addEventListener('click', ()=>{
+  placeFormValidator.resetValidation();
+ // placeFormValidator.hideInputError();
   placeOpenedPopup.open();
+
 } )
 
 
@@ -140,12 +144,7 @@ function handleSubmitProfile(evt) { //ф-я сабмитит форму реда
 
 formEditProfile.addEventListener('submit', handleSubmitProfile);
 
-buttonOpenPlacePopup.addEventListener('click', () => {
-  formNewPlace.reset();
-  resetInputs(placePopup);
-  placeFormValidator.toogleButtonsState();
-  openPopup(placePopup);
-});
+
 
 
 const createCard = (item) => {
@@ -176,15 +175,4 @@ function handleSubmitPlace (evt) { //ф-я сабмитит форму доба�
 
 formNewPlace.addEventListener('submit', handleSubmitPlace);
 
-//закрытие попапа по щелчку на оверлей
-const listPopups = Array.from(document.querySelectorAll('.popup'));
-listPopups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if(evt.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    }
-  });
-})
-
-export { openPopup, imagePopup, largeImage, captionImage }
 */
