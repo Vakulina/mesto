@@ -38,6 +38,7 @@ const containerSelector = '.places';
 const profileSelector = '.popup_type_profile';
 const placeSelector = '.popup_type_place';
 const imageSelector = '.popup_type_image';
-const closeButtonSelector = '.popup__reset-button'
+const closeButtonSelector = '.popup__reset-button';
+const openedPopupSelector ='popup_opened'
 
-export { initialCards, config, cardsTemplateSelector, containerSelector, imageSelector, placeSelector, profileSelector, closeButtonSelector};
+export { initialCards, config, cardsTemplateSelector, containerSelector, imageSelector, placeSelector, profileSelector, closeButtonSelector, openedPopupSelector};
