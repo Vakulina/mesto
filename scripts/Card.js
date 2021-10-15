@@ -1,6 +1,3 @@
-//import { openPopup, imagePopup, largeImage, captionImage } from './pages/index.js';
-
-
 export class Card {
   constructor({data, handleCardClick}, templateSelector) {
     this._text = data.name;
@@ -9,11 +6,8 @@ export class Card {
     this._templateSelector = templateSelector;
   }
 
-
   _getTemplate() {
-    // забираем разметку из HTML и клонируем элемент
     const cardElement = document.getElementById(this._templateSelector).content.querySelector('.place').cloneNode(true);
-    // вернём DOM-элемент карточки
     return cardElement;
   }
 
@@ -31,8 +25,6 @@ export class Card {
       this._handleCardClick();
     })
   }
-
-
 
   _handletoggleLike() {
     this._likeButton.classList.toggle('place__like-button_active');
@@ -64,17 +56,3 @@ export class Card {
 
   }
 }
-
-
-/*Свяжите класс `Card` c попапом. Сделайте так, чтобы Card принимал в конструктор функцию 
-//`handleCardClick`. Эта функция должна открывать попап с картинкой при клике на карточку.
-const handleCardClick = ()=>{
- 
-  popupWithImage.open.bind(popupWithImage);
-
-  popupWithImage.
-  this._handleCardClick({
-      src: this._img.src,
-      title: this._img.title
-  })
-}*/

@@ -4,6 +4,7 @@ import { Card } from '../Card.js';
 import Section from '../Section.js';
 import Popup from '../Popup.js';
 import PopupWithImage from '../PopupWithImage.js'
+import PopupWithForm from '../PopupWithForm.js'
 const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
 
@@ -35,20 +36,25 @@ profileFormValidator.enableValidation();
 const imagePopup= new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
+const createCard =(item)=>{
+
+    const card = new Card({data:item,
+                          handleCardClick: () => {
+                            imagePopup.open(item.link, item.name,  item.name);
+                          }
+                          
+              },  cardsTemplateSelector );
+return card.generateCard();
+
+}
+
 //первоначальная инициализация карточек на странице
 const cardsList = new Section({
   items: initialCards,
 
-  renderer: (item) => {
-    const card = new Card({data:item,
-                          handleCardClick: () => {
-                            imagePopup.open(item.link,item.name,  item.name);
-                          }
-                          
-              },  cardsTemplateSelector );
-    const cardElement = card.generateCard();
-    cardsList.addItem(cardElement);
-  }
+  renderer: (item)=>{
+    cardsList.addItem(createCard(item));
+    }
 
   }, containerSelector);
 
@@ -57,6 +63,26 @@ cardsList.renderItems()
 
 
 
+const handlePlaceFormSubmit = (arr) => {
+
+  cardsList.addItem(createCard({name:arr[0], link:arr[1]}));
+    }
+
+
+//const profilePopup= new PopupWithForm('.popup_type_profile', handleProfileFormSubmit);
+/*-
+profilePopup.setEventListeners()
+document.querySelector('.profile__open-popup').addEventListener('click', ()=>{
+  profilePopup.open();
+} )*/
+
+
+const placeOpenedPopup= new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
+
+placeOpenedPopup.setEventListeners()
+document.querySelector('.profile__adding-button').addEventListener('click', ()=>{
+  placeOpenedPopup.open();
+} )
 
 
 

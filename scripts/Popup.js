@@ -10,7 +10,6 @@ export default class Popup {
 
   _handleEscPress(evt) {
     if (evt.key === 'Escape') {
-      console.log(this);
       this.close();
     }
   }

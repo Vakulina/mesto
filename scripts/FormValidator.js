@@ -11,7 +11,6 @@ export class FormValidator {
   }
 
   _showInputError = ( inputElement) => {
-    console.log(this._errorElement);
     inputElement.classList.add(this._inputErrorClass);
     this._errorElement.classList.add(this._errorClass);
     this._errorElement.textContent = inputElement.validationMessage;
