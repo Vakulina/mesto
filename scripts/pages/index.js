@@ -5,6 +5,7 @@ import Section from '../Section.js';
 import Popup from '../Popup.js';
 import PopupWithImage from '../PopupWithImage.js'
 import PopupWithForm from '../PopupWithForm.js'
+import UserInfo from '../UserInfo.js'
 const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
 
