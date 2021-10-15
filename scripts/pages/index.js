@@ -8,7 +8,6 @@ import PopupWithForm from '../PopupWithForm.js'
 import UserInfo from '../UserInfo.js'
 const profilePopup = document.querySelector('.popup_type_profile');
 const placePopup = document.querySelector('.popup_type_place');
-
 const buttonOpenProfile = document.querySelector('.profile__open-popup');
 const buttonCloseProfile = document.querySelector('.popup__reset-button_type_profile');
 const buttonClosePlace = document.querySelector('.popup__reset-button_type_place');
