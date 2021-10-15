@@ -24,7 +24,7 @@ setEventListeners(){
   super.setEventListeners();
 }
 open(){
-  console.log(this._form);
+
   super.open()
 }
   close(){

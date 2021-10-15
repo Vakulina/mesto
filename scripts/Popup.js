@@ -28,6 +28,7 @@ export default class Popup {
     this._popup.addEventListener('click', (evt) => {
       this._overlay = document.querySelector(`.${openedPopupSelector}`);
       if ((evt.target === this._overlay) || (evt.target === this._closeButton)) {
+        this.close();
       }
     })
   }
