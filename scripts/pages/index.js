@@ -1,5 +1,5 @@
 import { FormValidator } from '../FormValidator.js';
-import { config, initialCards, cardsTemplateSelector, containerSelector, inputName, inputGob, formEditProfile, formNewPlace} from '../utils/constants.js';
+import { config, initialCards, cardsTemplateSelector, containerSelector, inputName, inputGob, formEditProfile, formNewPlace } from '../utils/constants.js';
 import { Card } from '../Card.js';
 import Section from '../Section.js';
 import PopupWithImage from '../PopupWithImage.js'
@@ -39,7 +39,7 @@ const handlePlaceFormSubmit = (arr) => {
   cardsList.addItem(createCard({ name: arr[0], link: arr[1] }));
 }
 
-const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);  
+const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
 
 placeOpenedPopup.setEventListeners()
 document.querySelector('.profile__adding-button').addEventListener('click', () => {
@@ -59,7 +59,7 @@ const handleProfileEdit = () => {
 }
 
 //колбэк функция для сабмита формы попапа по редактированию профиля
-const handleProfileSumbit =(data) => {
+const handleProfileSumbit = (data) => {
   newUserInfo.setUserInfo(data);
 }
 
