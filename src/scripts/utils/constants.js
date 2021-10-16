@@ -1,27 +1,36 @@
+
+import baikalImage from '../../images/Baikal.jpg';
+import moskowImage from '../../images/Moskow.jpg';
+import fiolentImage from '../../images/Fiolent.jpg';
+import petergofImage from '../../images/Peterhof.jpg';
+import rostovImage from '../../images/Rostow.jpg';
+import spbImage from '../../images/SPB.jpg';
+
+
 const initialCards = [
   {
     name: 'Байкал',
-    link: './images/Baikal.jpg'
+    link: baikalImage
   },
   {
     name: 'Москва',
-    link: './images/Moskow.jpg'
+    link: moskowImage
   },
   {
     name: 'Мыс Фиолент',
-    link: './images/Fiolent.jpg'
+    link: fiolentImage
   },
   {
     name: 'Петергоф',
-    link: './images/Peterhof.jpg'
+    link: petergofImage
   },
   {
     name: 'Ростов-на-Дону - столица Донского края',
-    link: './images/Rostow.jpg'
+    link: rostovImage
   },
   {
     name: 'Санкт-Петербург',
-    link: './images/SPB.jpg'
+    link: spbImage
   }
 ];
 

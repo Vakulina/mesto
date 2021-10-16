@@ -24,7 +24,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popup.addEventListener('click', (evt) => {
+    this._popup.addEventListener('pointerdown', (evt) => {
       this._overlay = document.querySelector(`.${openedPopupSelector}`);
       if ((evt.target === this._overlay) || (evt.target === this._closeButton)) {
         this.close();
