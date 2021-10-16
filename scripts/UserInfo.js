@@ -1,9 +1,18 @@
 export default class UserInfo {
-  constructor(){
+  constructor({nameSelector, specializationSelector}){
+this._name =  document.querySelector(nameSelector);
+this._specialization =   document.querySelector(specializationSelector);
+  }
+    getUserInfo(){
+    const data={};
+    data.name=this._name.textContent;
+    data.specialization = this._specialization.textContent;
 
-  }}
-/*Создайте класс UserInfo
-Класс UserInfo отвечает за управление отображением информации о пользователе на странице. Этот класс:
-Принимает в конструктор объект с селекторами двух элементов: элемента имени пользователя и элемента информации о себе.
-Содержит публичный метод getUserInfo, который возвращает объект с данными пользователя. Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
-Содержит публичный метод setUserInfo, который принимает новые данные пользователя и добавляет их на страницу.*/
+    return data;
+    }
+  setUserInfo(arr){
+
+    this._name.textContent =arr[0];
+    this._specialization.textContent=arr[1];
+  }
+  }

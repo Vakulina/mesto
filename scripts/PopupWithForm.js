@@ -34,17 +34,3 @@ open(){
   
   }
 }
-/*
-const handleProfileFormSubmit =()=>{
-  this._getInputValues();
-document.querySelector('.profile__title').textContent=(this._contentList)[0];
-document.querySelector('.profile__specification').textContent=(this._contentList)[0];
-}*/
-
-
-/*Создайте класс PopupWithForm, который наследует от Popup. Этот класс:
-Кроме селектора попапа принимает в конструктор колбэк сабмита формы.
-
-Содержит приватный метод _getInputValues, который собирает данные всех полей формы.
-
-Для каждого попапа создавайте свой экземпляр класса PopupWithForm.*/

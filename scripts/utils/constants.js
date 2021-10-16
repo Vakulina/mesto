@@ -35,14 +35,15 @@ const config = {
 }
 const cardsTemplateSelector = 'place-card';
 const containerSelector = '.places';
-const profileSelector = '.popup_type_profile';
-const placeSelector = '.popup_type_place';
-const imageSelector = '.popup_type_image';
 const closeButtonSelector = '.popup__reset-button';
 const openedPopupSelector ='popup_opened';
 const largeImageSelector= '.popup__large-image';
 const popupSumtitleSelector ='.popup__subtitle';
+const inputName = document.querySelector('.popup__input_type_name');
+const inputGob = document.querySelector('.popup__input_type_specification');
+const formEditProfile = document.querySelector('.popup__form_profile');
+const formNewPlace = document.querySelector('.popup__form_place');
 
 
 export { initialCards, config, cardsTemplateSelector, containerSelector, largeImageSelector, popupSumtitleSelector,
-   imageSelector, placeSelector, profileSelector, closeButtonSelector, openedPopupSelector};
+  closeButtonSelector, openedPopupSelector, inputName, inputGob, formEditProfile, formNewPlace};
