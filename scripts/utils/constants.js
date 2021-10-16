@@ -44,6 +44,5 @@ const inputGob = document.querySelector('.popup__input_type_specification');
 const formEditProfile = document.querySelector('.popup__form_profile');
 const formNewPlace = document.querySelector('.popup__form_place');
 
-
 export { initialCards, config, cardsTemplateSelector, containerSelector, largeImageSelector, popupSumtitleSelector,
   closeButtonSelector, openedPopupSelector, inputName, inputGob, formEditProfile, formNewPlace};
