@@ -34,12 +34,6 @@ export class Card {
     this._deleteCardButton.closest('.place').remove();
   }
 
-  _handleOpenLargeImage = () => {
-    largeImage.src = this._link;
-    largeImage.alt = this._text;
-    captionImage.textContent = this._text;
-    openPopup(imagePopup);
-  }
   generateCard() {
     // Запишем разметку в приватное поле _element. 
     // Так у других элементов появится доступ к ней.
