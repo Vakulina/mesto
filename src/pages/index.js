@@ -1,11 +1,11 @@
-import { FormValidator } from './scripts/FormValidator';
-import { config, initialCards, cardsTemplateSelector, containerSelector, inputName, inputGob, formEditProfile, formNewPlace } from './scripts/utils/constants.js';
-import { Card } from './scripts/Card.js';
-import Section from './scripts/Section.js';
-import PopupWithImage from './scripts/PopupWithImage.js';
-import PopupWithForm from './scripts/PopupWithForm.js';
-import UserInfo from './scripts/UserInfo.js';
-import './pages/index.css'; // добавьте импорт главного файла стилей 
+import { FormValidator } from '../components/FormValidator.js';
+import { config, initialCards, cardsTemplateSelector, containerSelector, inputName, inputGob, formEditProfile, formNewPlace } from '../utils/constants.js';
+import { Card } from '../components/Card.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import './index.css'; // добавьте импорт главного файла стилей 
 
 const placeFormValidator = new FormValidator(config, formNewPlace);
 placeFormValidator.enableValidation();
@@ -36,8 +36,8 @@ const cardsList = new Section({
 cardsList.renderItems();
 
 //коллбэк функция сабмита попапа по добавлению карточки нового места
-const handlePlaceFormSubmit = (arr) => {
-  cardsList.addItem(createCard({ name: arr[0], link: arr[1] }));
+const handlePlaceFormSubmit = ({name, link}) => {
+  cardsList.addItem(createCard({ name, link }));
 }
 
 const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
@@ -54,7 +54,7 @@ const newUserInfo = new UserInfo({ nameSelector: '.profile__title', specializati
 const handleProfileEdit = () => {
   const data = newUserInfo.getUserInfo();
   inputName.value = data.name;
-  inputGob.value = data.specialization;
+  inputGob.value = data.specification;
   profileFormValidator.resetValidation();
   profileOpenedPopup.open();
 }

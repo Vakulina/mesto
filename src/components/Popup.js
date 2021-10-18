@@ -1,5 +1,5 @@
 
-import { closeButtonSelector, openedPopupSelector } from './utils/constants.js';
+import { closeButtonSelector, openedPopupSelector } from '../utils/constants.js';
 
 export default class Popup {
   constructor(popupSelector) {
