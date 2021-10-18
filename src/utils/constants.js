@@ -9,27 +9,27 @@ import spbImage from '../images/SPB.jpg';
 
 const initialCards = [
   {
-    name: 'Байкал',
+    place: 'Байкал',
     link: baikalImage
   },
   {
-    name: 'Москва',
+    place: 'Москва',
     link: moskowImage
   },
   {
-    name: 'Мыс Фиолент',
+    place: 'Мыс Фиолент',
     link: fiolentImage
   },
   {
-    name: 'Петергоф',
+    place: 'Петергоф',
     link: petergofImage
   },
   {
-    name: 'Ростов-на-Дону - столица Донского края',
+    place: 'Ростов-на-Дону - столица Донского края',
     link: rostovImage
   },
   {
-    name: 'Санкт-Петербург',
+    place: 'Санкт-Петербург',
     link: spbImage
   }
 ];

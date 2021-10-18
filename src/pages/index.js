@@ -20,7 +20,7 @@ const createCard = (item) => {
   const card = new Card({
     data: item,
     handleCardClick: () => {
-      imagePopup.open(item.link, item.name, item.name);
+      imagePopup.open(item.link, item.place, item.place);
     }
   }, cardsTemplateSelector);
   return card.generateCard();
@@ -36,8 +36,8 @@ const cardsList = new Section({
 cardsList.renderItems();
 
 //коллбэк функция сабмита попапа по добавлению карточки нового места
-const handlePlaceFormSubmit = ({name, link}) => {
-  cardsList.addItem(createCard({ name, link }));
+const handlePlaceFormSubmit = ({place, link}) => {
+  cardsList.addItem(createCard({ place, link }));
 }
 
 const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
