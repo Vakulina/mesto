@@ -5,7 +5,9 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
+import {Api} from '../components/Api.js'
 import './index.css'; // добавьте импорт главного файла стилей 
+
 
 const placeFormValidator = new FormValidator(config, formNewPlace);
 placeFormValidator.enableValidation();
@@ -67,3 +69,13 @@ const handleProfileSumbit = (data) => {
 const profileOpenedPopup = new PopupWithForm('.popup_type_profile', handleProfileSumbit);
 profileOpenedPopup.setEventListeners();
 document.querySelector('.profile__open-popup').addEventListener('click', handleProfileEdit);
+
+fetch('https://nomoreparties.co/v1/cohort-29/users/me', {
+  headers: {
+    authorization: '1b533183-cd0b-49d7-a8aa-3f93cdc1c349'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    console.log(result);
+  }); 
