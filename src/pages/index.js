@@ -7,7 +7,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { Api } from '../components/Api.js'
 import './index.css'; // добавьте импорт главного файла стилей 
-
+let cardsList;
 
 const placeFormValidator = new FormValidator(config, formNewPlace);
 placeFormValidator.enableValidation();
@@ -19,7 +19,6 @@ const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
 
 const createCard = (item) => {
-  console.log(item)
   const card = new Card({
     data: item,
     handleCardClick: () => {
@@ -31,18 +30,7 @@ const createCard = (item) => {
 
 
 
-//коллбэк функция сабмита попапа по добавлению карточки нового места
-const handlePlaceFormSubmit = ({ place, link }) => {
-  cardsList.addItem(createCard({ place, link }));
-}
 
-const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
-
-placeOpenedPopup.setEventListeners()
-document.querySelector('.profile__adding-button').addEventListener('click', () => {
-  //placeFormValidator.resetValidation();
-  placeOpenedPopup.open();
-})
 
 const newUserInfo = new UserInfo({ nameSelector: '.profile__title', specializationSelector: '.profile__specification', avatarSelector: '.profile__avatar' });
 
@@ -86,7 +74,7 @@ document.querySelector('.profile__open-popup').addEventListener('click', handleP
 
 api.getInitialCards()
 .then((res)=>{
-  const cardsList = new Section({
+ cardsList = new Section({
     items: res,
     renderer: (item) => {
       cardsList.addItem(createCard(item));
@@ -95,4 +83,18 @@ api.getInitialCards()
 
 
 cardsList.renderItems();
+})
+
+//коллбэк функция сабмита попапа по добавлению карточки нового места
+const handlePlaceFormSubmit = ({ place, link }) => {
+  const data= {name:place, link: link};
+  cardsList.addItem(createCard(data));
+}
+
+const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
+
+placeOpenedPopup.setEventListeners()
+document.querySelector('.profile__adding-button').addEventListener('click', () => {
+placeFormValidator.resetValidation();
+  placeOpenedPopup.open();
 })
