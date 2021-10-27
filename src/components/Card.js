@@ -2,8 +2,9 @@ export class Card {
   constructor({data, handleCardClick}, templateSelector) {
     this._text = data.name;
     this._link = data.link;
-    this._like = data.like;
+    //this._like = data.like;
     this._id=data._id;
+    this._likeAmount = data.likes.length;
     this._handleCardClick = handleCardClick;
     this._templateSelector = templateSelector;
   }
@@ -47,7 +48,7 @@ export class Card {
     this._element.querySelector('.place__img').src = this._link;
     this._element.querySelector('.place__paragraf').textContent = this._text;
     this._element.querySelector('.place__img').alt = `Фото пользователя: ${this._text}`;
-
+    this._element.querySelector('.place__like-amount').textContent = this._likeAmount;
     // Вернём элемент наружу
     return this._element;
 
