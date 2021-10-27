@@ -46,36 +46,53 @@ const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormS
 
 placeOpenedPopup.setEventListeners()
 document.querySelector('.profile__adding-button').addEventListener('click', () => {
-  placeFormValidator.resetValidation();
+  //placeFormValidator.resetValidation();
   placeOpenedPopup.open();
 })
 
-const newUserInfo = new UserInfo({ nameSelector: '.profile__title', specializationSelector: '.profile__specification' });
+const newUserInfo = new UserInfo({ nameSelector: '.profile__title', specializationSelector: '.profile__specification', avatarSelector: '.profile__avatar'});
 
 //колбэк функция для кнопки "редактировать профайл"
 const handleProfileEdit = () => {
   const data = newUserInfo.getUserInfo();
   inputName.value = data.name;
-  inputGob.value = data.specification;
+  inputGob.value = data.about;
   profileFormValidator.resetValidation();
   profileOpenedPopup.open();
 }
 
+const configConnection={
+  url: 'https://mesto.nomoreparties.co/v1/cohort-29',
+  headers: {
+    authorization: '1b533183-cd0b-49d7-a8aa-3f93cdc1c349',
+    'Content-Type': 'application/json'
+  }
+}
+
+const api = new Api(configConnection); 
+
+//коллбэк для загрузки данных профайла и аватара с сервера
+const handleProfileLoad =api.getInfoUserOfServ();
+
+handleProfileLoad
+.then((res)=>{newUserInfo.setUserInfo(res)})
+
+
+
+
+
+
+// Обработка сабмита формы редактирования профиля
+
 //колбэк функция для сабмита формы попапа по редактированию профиля
 const handleProfileSumbit = (data) => {
-  newUserInfo.setUserInfo(data);
+ const body= JSON.stringify({ name: data.name, about: data.about})
+api.setNewUserInfo(body)
+newUserInfo.setUserInfo(data);
 }
 
 const profileOpenedPopup = new PopupWithForm('.popup_type_profile', handleProfileSumbit);
 profileOpenedPopup.setEventListeners();
 document.querySelector('.profile__open-popup').addEventListener('click', handleProfileEdit);
 
-fetch('https://nomoreparties.co/v1/cohort-29/users/me', {
-  headers: {
-    authorization: '1b533183-cd0b-49d7-a8aa-3f93cdc1c349'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
+
