@@ -44,5 +44,15 @@ export class Api {
       .then(this._checkRequest)
       .catch(this._showError)
   }
+
+  setNewCard(body){
+    return fetch (`${this._url}/cards`,{
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: this._headers,
+    })
+    .then(this._checkRequest)
+    .catch(this._showError)
+  }
 }
 

@@ -74,21 +74,28 @@ document.querySelector('.profile__open-popup').addEventListener('click', handleP
 
 api.getInitialCards()
 .then((res)=>{
- cardsList = new Section({
+  //отсортируем массив объектов по убыванию даты, для корректной отрисовки
+  res.sort((a,b)=> {return new Date(a.createdAt) - new Date(b.createdAt)}); 
+  cardsList = new Section({
     items: res,
     renderer: (item) => {
       cardsList.addItem(createCard(item));
     }
   }, containerSelector);
-
-
 cardsList.renderItems();
 })
 
 //коллбэк функция сабмита попапа по добавлению карточки нового места
 const handlePlaceFormSubmit = ({ place, link }) => {
-  const data= {name:place, link: link};
-  cardsList.addItem(createCard(data));
+ const data= {name:place, link: link};
+ /* cardsList.addItem(createCard(data)); //сразу отрисуем новую карточку */
+
+  api.setNewCard(data)
+      .then((res)=>{
+        cardsList.addItem(createCard(res))
+      })
+     
+
 }
 
 const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);

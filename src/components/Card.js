@@ -32,6 +32,7 @@ export class Card {
     this._likeButton.classList.toggle('place__like-button_active');
   }
 
+
   _handDeleteCard() {
     this._deleteCardButton.closest('.place').remove();
   }
