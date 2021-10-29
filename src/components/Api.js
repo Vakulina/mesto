@@ -9,21 +9,21 @@ export class Api {
       return res.json()
     }
     else {
-      return Promise.reject(`Извините! Произошла ошибка:${res.statusText}`)
+      return Promise.reject(res.statusText)
     }
   }
-
-  _showError(err) {
+/*
+  _showError(err, text) {
     console.log(err)
   }
-
+*/
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: 'GET',
       headers: this._headers,
     })
     .then(this._checkRequest)
-    .catch(this._showError)
+    .catch(err => console.log(`Ошибка загрузки данных с сервера: ${err}`))
   }
 
   getInfoUserOfServ() {
@@ -32,7 +32,7 @@ export class Api {
       headers: this._headers,
     })
       .then(this._checkRequest)
-      .catch(this._showError)
+      .catch(err => console.log(`Ошибка загрузки профайла: ${err}`))
   }
 
   setNewUserInfo(body) {
@@ -42,7 +42,7 @@ export class Api {
       headers: this._headers,
     })
       .then(this._checkRequest)
-      .catch(this._showError)
+      .catch(err => console.log(`Ошибка сохранения: ${err}`))
   }
 
   setNewCard(body){
@@ -52,7 +52,33 @@ export class Api {
       headers: this._headers,
     })
     .then(this._checkRequest)
-    .catch(this._showError)
+    .catch(err => console.log(`Ошибка сохранения: ${err}`))
+  }
+  setLike(cardId){
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+      .then(this._checkRequest)
+      .catch(err => console.log(`Ошибка изменения статуса лайка: ${err}`))
+  }
+  deleteLike(cardId){
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(this._checkRequest)
+      .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
+  }
+ 
+
+  likeCard(cardId, isLiked) {
+    return fetch(`${this._url}/cards/likes/${cardId}`, {
+      method: isLiked ? "DELETE" : "PUT",
+      headers: this._headers,
+    })
+      .then(this._checkRequest)
+      .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
   }
 }
 

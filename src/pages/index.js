@@ -8,6 +8,7 @@ import UserInfo from '../components/UserInfo.js';
 import { Api } from '../components/Api.js'
 import './index.css'; // добавьте импорт главного файла стилей 
 let cardsList;
+let userId;
 
 const placeFormValidator = new FormValidator(config, formNewPlace);
 placeFormValidator.enableValidation();
@@ -20,19 +21,27 @@ imagePopup.setEventListeners();
 
 const createCard = (item) => {
   const card = new Card({
-    data: item,
+    data: { ...item, userId },
     handleCardClick: () => {
       imagePopup.open(item.link, item.name, item.name);
-    }
-  }, cardsTemplateSelector);
+    },
+
+    handleLikeClick: (card) => {
+      api.likeCard(card.id(), card.hasLike())
+        .then(data => {
+          card.setLikesInfo({ ...data });
+        })
+      //  
+    },
+  },
+    cardsTemplateSelector);
   return card.generateCard();
 }
 
-
-
-
-
-const newUserInfo = new UserInfo({ nameSelector: '.profile__title', specializationSelector: '.profile__specification', avatarSelector: '.profile__avatar' });
+const newUserInfo = new UserInfo({
+  nameSelector: '.profile__title',
+  specializationSelector: '.profile__specification', avatarSelector: '.profile__avatar'
+});
 
 //колбэк функция для кнопки "редактировать профайл"
 const handleProfileEdit = () => {
@@ -55,9 +64,12 @@ const api = new Api(configConnection);
 
 //коллбэк для загрузки данных профайла и аватара с сервера
 const handleProfileLoad = api.getInfoUserOfServ();
-
 handleProfileLoad
-  .then((res) => { newUserInfo.setUserInfo(res) })
+  .then((res) => {
+    newUserInfo.setUserInfo(res)
+    userId = res._id //определяем id пользователя
+  })
+
 
 //колбэк функция для сабмита формы попапа по редактированию профиля
 const handleProfileSumbit = (data) => {
@@ -71,37 +83,36 @@ profileOpenedPopup.setEventListeners();
 document.querySelector('.profile__open-popup').addEventListener('click', handleProfileEdit);
 
 //первоначальная инициализация карточек на странице
-
 api.getInitialCards()
-.then((res)=>{
-  //отсортируем массив объектов по убыванию даты, для корректной отрисовки
-  res.sort((a,b)=> {return new Date(a.createdAt) - new Date(b.createdAt)}); 
-  cardsList = new Section({
-    items: res,
-    renderer: (item) => {
-      cardsList.addItem(createCard(item));
-    }
-  }, containerSelector);
-cardsList.renderItems();
-})
+  .then((res) => {
+    //отсортируем массив объектов по убыванию даты, для корректной отрисовки
+    res.sort((a, b) => { return new Date(a.createdAt) - new Date(b.createdAt) });
+    cardsList = new Section({
+      items: res,
+      renderer: (item) => {
+        cardsList.addItem(createCard(item));
+      }
+    }, containerSelector);
+    cardsList.renderItems();
+  })
+
 
 //коллбэк функция сабмита попапа по добавлению карточки нового места
 const handlePlaceFormSubmit = ({ place, link }) => {
- const data= {name:place, link: link};
- /* cardsList.addItem(createCard(data)); //сразу отрисуем новую карточку */
+  const data = { name: place, link: link };
+  /* cardsList.addItem(createCard(data)); //сразу отрисуем новую карточку */
 
   api.setNewCard(data)
-      .then((res)=>{
-        cardsList.addItem(createCard(res))
-      })
-     
-
+    .then((res) => {
+      cardsList.addItem(createCard(res))
+    })
+    
 }
 
 const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
 
 placeOpenedPopup.setEventListeners()
 document.querySelector('.profile__adding-button').addEventListener('click', () => {
-placeFormValidator.resetValidation();
+  placeFormValidator.resetValidation();
   placeOpenedPopup.open();
 })
