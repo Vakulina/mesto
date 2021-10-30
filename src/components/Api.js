@@ -80,5 +80,13 @@ export class Api {
       .then(this._checkRequest)
       .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
   }
-}
+  setAvatar(avatar){
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      body: JSON.stringify(avatar),
+      headers: this._headers,
+    })
+      .then(this._checkRequest)
+      .catch(err => console.log(`Ошибка сохранения аватара: ${err}`))
+}}
 

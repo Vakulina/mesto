@@ -2,6 +2,7 @@ const path = require('path'); // подключаем path к конфигу в�
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключите плагин 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключили плагин 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // подключили к проекту mini-css-extract-plugin
+const isDev = process.env.NODE_ENV === 'development';
 module.exports = {
 
   entry: { main: './src/pages/index.js' },
@@ -23,9 +24,8 @@ module.exports = {
       {
         // применять это правило только к CSS-файлам
         test: /\.css$/,
-        // при обработке этих файлов нужно использовать
-        // MiniCssExtractPlugin.loader и css-loader
-        use: [MiniCssExtractPlugin.loader, {
+//: MiniCssExtractPlugin.loader
+        use: [('style-loader'), {
           loader: 'css-loader',
           options: { importLoaders: 1 }
         },

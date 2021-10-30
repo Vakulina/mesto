@@ -7,32 +7,7 @@ import rostovImage from '../images/Rostow.jpg';
 import spbImage from '../images/SPB.jpg';
 
 
-const initialCards = [
-  {
-    place: 'Байкал',
-    link: baikalImage
-  },
-  {
-    place: 'Москва',
-    link: moskowImage
-  },
-  {
-    place: 'Мыс Фиолент',
-    link: fiolentImage
-  },
-  {
-    place: 'Петергоф',
-    link: petergofImage
-  },
-  {
-    place: 'Ростов-на-Дону - столица Донского края',
-    link: rostovImage
-  },
-  {
-    place: 'Санкт-Петербург',
-    link: spbImage
-  }
-];
+
 
 const config = {
   formSelector: '.popup__form',
@@ -41,6 +16,14 @@ const config = {
   inactiveButtonClass: 'popup__submit-button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
+}
+
+const configConnection = {
+  url: 'https://mesto.nomoreparties.co/v1/cohort-29',
+  headers: {
+    authorization: '1b533183-cd0b-49d7-a8aa-3f93cdc1c349',
+    'Content-Type': 'application/json'
+  }
 }
 const cardsTemplateSelector = 'place-card';
 const containerSelector = '.places';
@@ -52,6 +35,7 @@ const inputName = document.querySelector('.popup__input_type_name');
 const inputGob = document.querySelector('.popup__input_type_specification');
 const formEditProfile = document.querySelector('.popup__form_profile');
 const formNewPlace = document.querySelector('.popup__form_place');
+const formEditAvatar=document.querySelector('.popup_type_change-avatar')
 
-export { initialCards, config, cardsTemplateSelector, containerSelector, largeImageSelector, popupSumtitleSelector,
-  closeButtonSelector, openedPopupSelector, inputName, inputGob, formEditProfile, formNewPlace};
+export { config, configConnection, cardsTemplateSelector, containerSelector, largeImageSelector, popupSumtitleSelector,
+  closeButtonSelector, openedPopupSelector, inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar};

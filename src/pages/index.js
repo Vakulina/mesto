@@ -1,5 +1,5 @@
 import { FormValidator } from '../components/FormValidator.js';
-import { config, initialCards, cardsTemplateSelector, containerSelector, inputName, inputGob, formEditProfile, formNewPlace } from '../utils/constants.js';
+import { config, configConnection, cardsTemplateSelector, containerSelector, inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -14,6 +14,9 @@ const placeFormValidator = new FormValidator(config, formNewPlace);
 placeFormValidator.enableValidation();
 
 const profileFormValidator = new FormValidator(config, formEditProfile);
+profileFormValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(config, formEditAvatar);
 profileFormValidator.enableValidation();
 
 const imagePopup = new PopupWithImage('.popup_type_image');
@@ -54,14 +57,6 @@ const handleProfileEdit = () => {
   inputGob.value = data.about;
   profileFormValidator.resetValidation();
   profileOpenedPopup.open();
-}
-
-const configConnection = {
-  url: 'https://mesto.nomoreparties.co/v1/cohort-29',
-  headers: {
-    authorization: '1b533183-cd0b-49d7-a8aa-3f93cdc1c349',
-    'Content-Type': 'application/json'
-  }
 }
 
 const api = new Api(configConnection);
