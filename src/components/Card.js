@@ -1,9 +1,9 @@
 export class Card {
-  constructor({ data, handleCardClick, handleLikeClick, handleTrashClick }, templateSelector) {
+  constructor({ data, handleCardClick, handleLikeClick, handleBinClick }, templateSelector) {
     this._text = data.name;
     this._link = data.link;
     this._handleLikeClick = handleLikeClick;
-    this._handleTrashClick = handleTrashClick;
+    this._handleBinClick = handleBinClick;
     this._id = data._id;
     this._authorId = data.owner._id;
     this._likeAmount = data.likes.length;
@@ -26,9 +26,12 @@ export class Card {
 
       this._handleLikeClick(this)
     });
+
+    if (this._deleteCardButton){
     this._deleteCardButton.addEventListener('click', () => {
-      this._handDeleteCard();
-    });
+     // this.handleBinClick();
+      console.log('fdgdfg')
+    })};
     this._imageElement.addEventListener('click', () => {
       this._handleCardClick(this);
     })
@@ -81,6 +84,10 @@ export class Card {
     this._element.querySelector('.place__paragraf').textContent = this._text;
     this._element.querySelector('.place__img').alt = `Фото пользователя: ${this._text}`;
     this._element.querySelector('.place__like-amount').textContent = this._likeAmount;
+
+    if (this._authorId !== this._userId){this._deleteCardButton.remove()}
+      
+  
     this._toogleLikes()
     // Вернём элемент наружу
     return this._element;

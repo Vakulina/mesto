@@ -33,6 +33,10 @@ const createCard = (item) => {
         })
       //  
     },
+    handleBinClick:(card)=>{
+      
+    }
+
   },
     cardsTemplateSelector);
   return card.generateCard();
