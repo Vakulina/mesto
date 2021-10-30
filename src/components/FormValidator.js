@@ -25,6 +25,7 @@ export class FormValidator {
 
   _checkInputsValidity = (inputElement) => {
     this._errorElement = this._formElement.querySelector(`#${inputElement.name}-error`);
+  
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
     }
@@ -65,6 +66,7 @@ _toogleButtonsState() {
      }
 
   enableValidation() {
+    console.log(this._listInputs)
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._toogleButtonsState();

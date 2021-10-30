@@ -66,10 +66,13 @@
 
   <section class="popup popup_type_change-avatar ">
     <div class="popup__container"> 
-      <h2 class="popup__title">Обновить аватар</h2>
-      <input class="popup__input popup__input_type_avatar" name="name" type="avatar" placeholder="Введите адрес аватара" minlength="2" maxlength="40" required >
       <button class="popup__reset-button popup__reset-button_type_image" type="button"></button>
-      <button class="popup__submit-button popup__submit-button_disabled" type="submit">Сохрать</button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form id="new-avatar-form" class="popup__form popup__form_avatar" name="avatar__form" novalidate>
+      <input class="popup__input popup__input_type_avatar" name="avatar" type="url" placeholder="Введите адрес аватара" required >
+      <span class="popup__error popup__error_visible" id="avatar-error">Введите адрес сайта</span>
+      <button class="popup__submit-button popup__submit-button_disabled" type="submit">Сохранить</button>
+    </form>
     </div>
   </section>
 

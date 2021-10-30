@@ -17,7 +17,7 @@ const profileFormValidator = new FormValidator(config, formEditProfile);
 profileFormValidator.enableValidation();
 
 const avatarFormValidator = new FormValidator(config, formEditAvatar);
-profileFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 const imagePopup = new PopupWithImage('.popup_type_image');
 imagePopup.setEventListeners();
@@ -74,7 +74,7 @@ handleProfileLoad
 const handleProfileSumbit = (data) => {
   const body = JSON.stringify({ name: data.name, about: data.about })
   api.setNewUserInfo(body)
-  newUserInfo.setUserInfo(data);
+  .then(newUserInfo.setUserInfo(data));
 }
 
 const profileOpenedPopup = new PopupWithForm('.popup_type_profile', handleProfileSumbit);
@@ -114,4 +114,13 @@ placeOpenedPopup.setEventListeners()
 document.querySelector('.profile__adding-button').addEventListener('click', () => {
   placeFormValidator.resetValidation();
   placeOpenedPopup.open();
+})
+
+const handleAvatarFormSubmit =()=>{}
+const avatarChangingPopup = new PopupWithForm('.popup_type_change-avatar', handleAvatarFormSubmit);
+
+avatarChangingPopup.setEventListeners()
+document.querySelector('.profile__avatar').addEventListener('click', () => {
+  avatarFormValidator.resetValidation();
+  avatarChangingPopup.open();
 })
