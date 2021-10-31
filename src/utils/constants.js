@@ -24,6 +24,6 @@ const inputGob = document.querySelector('.popup__input_type_specification');
 const formEditProfile = document.querySelector('.popup__form_profile');
 const formNewPlace = document.querySelector('.popup__form_place');
 const formEditAvatar=document.querySelector('.popup_type_change-avatar')
-const formDeleteCard=document.querySelector('.popup_type_delete-card')
+
 export { config, configConnection, cardsTemplateSelector, containerSelector, largeImageSelector, popupSumtitleSelector,
-  closeButtonSelector, openedPopupSelector, inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar,formDeleteCard};
+  closeButtonSelector, openedPopupSelector, inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar};

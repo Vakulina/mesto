@@ -1,8 +1,6 @@
 import { FormValidator } from '../components/FormValidator.js';
-import {
-  config, configConnection, cardsTemplateSelector, containerSelector,
-  inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar, formDeleteCard
-} from '../utils/constants.js';
+import { config, configConnection, cardsTemplateSelector, containerSelector,
+  inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar} from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -131,7 +129,7 @@ const handleAvatarFormSubmit = (avatar) => {
     .then((res) => {
       newUserInfo.setAvatar(res.avatar)
     })
-    .finally(()=>{
+    .finally(() => {
       avatarChangingPopup.renderLoading(false);
     })
 }
