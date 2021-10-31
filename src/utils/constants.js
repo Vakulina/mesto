@@ -6,7 +6,6 @@ const config = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible',
 }
-
 const configConnection = {
   url: 'https://mesto.nomoreparties.co/v1/cohort-29',
   headers: {
@@ -26,6 +25,5 @@ const formEditProfile = document.querySelector('.popup__form_profile');
 const formNewPlace = document.querySelector('.popup__form_place');
 const formEditAvatar=document.querySelector('.popup_type_change-avatar')
 const formDeleteCard=document.querySelector('.popup_type_delete-card')
-
 export { config, configConnection, cardsTemplateSelector, containerSelector, largeImageSelector, popupSumtitleSelector,
   closeButtonSelector, openedPopupSelector, inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar,formDeleteCard};

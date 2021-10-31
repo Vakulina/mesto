@@ -23,8 +23,7 @@ module.exports = {
     rules: [ 
       {
         // применять это правило только к CSS-файлам
-        test: /\.css$/,
-//: 
+        test: /\.css$/, 
         use: [(MiniCssExtractPlugin.loader), {
           loader: 'css-loader',
           options: { importLoaders: 1 }

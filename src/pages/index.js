@@ -91,8 +91,12 @@ handleProfileLoad
 //колбэк функция для сабмита формы попапа по редактированию профиля
 const handleProfileSumbit = (data) => {
   const body = JSON.stringify({ name: data.name, about: data.about })
+  profileOpenedPopup.renderLoading(true);
   api.setNewUserInfo(body)
-    .then(newUserInfo.setUserInfo(data));
+    .then(newUserInfo.setUserInfo(data))
+    .finally(() => {
+      profileOpenedPopup.renderLoading(false);
+    })
 }
 
 const profileOpenedPopup = new PopupWithForm('.popup_type_profile', handleProfileSumbit);
@@ -102,12 +106,14 @@ document.querySelector('.profile__open-popup').addEventListener('click', handleP
 
 //коллбэк функция сабмита попапа по добавлению карточки нового места
 const handlePlaceFormSubmit = ({ place, link }) => {
+  placeOpenedPopup.renderLoading(true);
   const data = { name: place, link: link };
-  /* cardsList.addItem(createCard(data)); //сразу отрисуем новую карточку */
-
   api.setNewCard(data)
     .then((res) => {
       cardsList.addItem(createCard(res))
+    })
+    .finally(() => {
+      placeOpenedPopup.renderLoading(false);
     })
 }
 
@@ -120,9 +126,13 @@ document.querySelector('.profile__adding-button').addEventListener('click', () =
 })
 //коллбэк функция по изменению аватара
 const handleAvatarFormSubmit = (avatar) => {
+  avatarChangingPopup.renderLoading(true)
   api.setAvatar(avatar)
     .then((res) => {
       newUserInfo.setAvatar(res.avatar)
+    })
+    .finally(()=>{
+      avatarChangingPopup.renderLoading(false);
     })
 }
 
@@ -144,3 +154,5 @@ const handleDeleteCardSubmit = (card) => {
 
 const cardDeletePopup = new PopupForConfirm('.popup_type_delete-card', handleDeleteCardSubmit)
 cardDeletePopup.setEventListeners();
+
+
