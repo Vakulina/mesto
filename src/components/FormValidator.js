@@ -66,7 +66,6 @@ _toogleButtonsState() {
      }
 
   enableValidation() {
-    console.log(this._listInputs)
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._toogleButtonsState();

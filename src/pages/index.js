@@ -1,11 +1,15 @@
 import { FormValidator } from '../components/FormValidator.js';
-import { config, configConnection, cardsTemplateSelector, containerSelector, inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar } from '../utils/constants.js';
+import {
+  config, configConnection, cardsTemplateSelector, containerSelector,
+  inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar, formDeleteCard
+} from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { Api } from '../components/Api.js'
+import PopupForConfirm from '../components/PopupForConfirm.js';
 import './index.css'; // добавьте импорт главного файла стилей 
 let cardsList;
 let userId;
@@ -34,10 +38,9 @@ const createCard = (item) => {
         .then(data => {
           card.setLikesInfo({ ...data });
         })
-      //  
     },
-    handleBinClick:(card)=>{
-      
+    handleBinClick: (card) => {
+      cardDeletePopup.open(card);
     }
 
   },
@@ -89,7 +92,7 @@ handleProfileLoad
 const handleProfileSumbit = (data) => {
   const body = JSON.stringify({ name: data.name, about: data.about })
   api.setNewUserInfo(body)
-  .then(newUserInfo.setUserInfo(data));
+    .then(newUserInfo.setUserInfo(data));
 }
 
 const profileOpenedPopup = new PopupWithForm('.popup_type_profile', handleProfileSumbit);
@@ -116,11 +119,11 @@ document.querySelector('.profile__adding-button').addEventListener('click', () =
   placeOpenedPopup.open();
 })
 //коллбэк функция по изменению аватара
-const handleAvatarFormSubmit =(avatar)=>{
+const handleAvatarFormSubmit = (avatar) => {
   api.setAvatar(avatar)
-  .then((res)=>{
-    newUserInfo.setAvatar(res.avatar)
-  })
+    .then((res) => {
+      newUserInfo.setAvatar(res.avatar)
+    })
 }
 
 const avatarChangingPopup = new PopupWithForm('.popup_type_change-avatar', handleAvatarFormSubmit);
@@ -130,3 +133,14 @@ document.querySelector('.profile__avatar').addEventListener('click', () => {
   avatarFormValidator.resetValidation();
   avatarChangingPopup.open();
 })
+
+const handleDeleteCardSubmit = (card) => {
+  api.deleteCard(card._id)
+    .then(() => {
+      card.deleteCard()
+      cardDeletePopup.close();
+    })
+}
+
+const cardDeletePopup = new PopupForConfirm('.popup_type_delete-card', handleDeleteCardSubmit)
+cardDeletePopup.setEventListeners();

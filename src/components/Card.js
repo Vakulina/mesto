@@ -27,11 +27,11 @@ export class Card {
       this._handleLikeClick(this)
     });
 
-    if (this._deleteCardButton){
-    this._deleteCardButton.addEventListener('click', () => {
-     // this.handleBinClick();
-      console.log('fdgdfg')
-    })};
+    if (this._deleteCardButton) {
+      this._deleteCardButton.addEventListener('click', () => {
+        this._handleBinClick(this);
+      })
+    };
     this._imageElement.addEventListener('click', () => {
       this._handleCardClick(this);
     })
@@ -70,10 +70,6 @@ export class Card {
     return hasUserLike
   }
 
-  _handDeleteCard() {
-    this._deleteCardButton.closest('.place').remove();
-  }
-
   generateCard() {
     // Запишем разметку в приватное поле _element. 
     // Так у других элементов появится доступ к ней.
@@ -85,11 +81,14 @@ export class Card {
     this._element.querySelector('.place__img').alt = `Фото пользователя: ${this._text}`;
     this._element.querySelector('.place__like-amount').textContent = this._likeAmount;
 
-    if (this._authorId !== this._userId){this._deleteCardButton.remove()}
-      
-  
+    if (this._authorId !== this._userId) { this._deleteCardButton.remove() }
+
+
     this._toogleLikes()
     // Вернём элемент наружу
     return this._element;
+  }
+  deleteCard() {
+    this._element.remove()
   }
 }
