@@ -1,14 +1,3 @@
-
-import baikalImage from '../images/Baikal.jpg';
-import moskowImage from '../images/Moskow.jpg';
-import fiolentImage from '../images/Fiolent.jpg';
-import petergofImage from '../images/Peterhof.jpg';
-import rostovImage from '../images/Rostow.jpg';
-import spbImage from '../images/SPB.jpg';
-
-
-
-
 const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',

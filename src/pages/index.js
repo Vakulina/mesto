@@ -61,6 +61,20 @@ const handleProfileSubmit = () => {
 
 const api = new Api(configConnection);
 
+//первоначальная инициализация карточек на странице
+api.getInitialCards()
+  .then((res) => {
+    //отсортируем массив объектов по убыванию даты, для корректной отрисовки
+    res.sort((a, b) => { return new Date(a.createdAt) - new Date(b.createdAt) });
+    cardsList = new Section({
+      items: res,
+      renderer: (item) => {
+        cardsList.addItem(createCard(item));
+      }
+    }, containerSelector);
+    cardsList.renderItems();
+  })
+
 //коллбэк для загрузки данных профайла и аватара с сервера
 const handleProfileLoad = api.getInfoUserOfServ();
 handleProfileLoad
@@ -82,20 +96,6 @@ const profileOpenedPopup = new PopupWithForm('.popup_type_profile', handleProfil
 profileOpenedPopup.setEventListeners();
 document.querySelector('.profile__open-popup').addEventListener('click', handleProfileSubmit);
 
-//первоначальная инициализация карточек на странице
-api.getInitialCards()
-  .then((res) => {
-    //отсортируем массив объектов по убыванию даты, для корректной отрисовки
-    res.sort((a, b) => { return new Date(a.createdAt) - new Date(b.createdAt) });
-    cardsList = new Section({
-      items: res,
-      renderer: (item) => {
-        cardsList.addItem(createCard(item));
-      }
-    }, containerSelector);
-    cardsList.renderItems();
-  })
-
 
 //коллбэк функция сабмита попапа по добавлению карточки нового места
 const handlePlaceFormSubmit = ({ place, link }) => {
@@ -106,7 +106,6 @@ const handlePlaceFormSubmit = ({ place, link }) => {
     .then((res) => {
       cardsList.addItem(createCard(res))
     })
-    
 }
 
 const placeOpenedPopup = new PopupWithForm('.popup_type_place', handlePlaceFormSubmit);
@@ -116,16 +115,13 @@ document.querySelector('.profile__adding-button').addEventListener('click', () =
   placeFormValidator.resetValidation();
   placeOpenedPopup.open();
 })
-
+//коллбэк функция по изменению аватара
 const handleAvatarFormSubmit =(avatar)=>{
   api.setAvatar(avatar)
   .then((res)=>{
     newUserInfo.setAvatar(res.avatar)
   })
 }
-
-
-
 
 const avatarChangingPopup = new PopupWithForm('.popup_type_change-avatar', handleAvatarFormSubmit);
 
