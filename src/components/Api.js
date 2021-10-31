@@ -7,6 +7,7 @@ export class Api {
   _checkRequest(res) {
     if (res.ok) {
       return res.json()
+
     }
     else {
       return Promise.reject(res.statusText)
@@ -88,5 +89,14 @@ export class Api {
     })
       .then(this._checkRequest)
       .catch(err => console.log(`Ошибка сохранения аватара: ${err}`))
-}}
+}
+getAvatarFromServ(){
+  return fetch(`${this._url}/users/me`, {
+    method: 'GET',
+    headers: this._headers,
+  })
+    .then(this._checkRequest)
+    .catch(err => console.log(`Ошибка загрузки профайла: ${err}`))
+}
+}
 

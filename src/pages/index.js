@@ -51,7 +51,7 @@ const newUserInfo = new UserInfo({
 });
 
 //колбэк функция для кнопки "редактировать профайл"
-const handleProfileEdit = () => {
+const handleProfileSubmit = () => {
   const data = newUserInfo.getUserInfo();
   inputName.value = data.name;
   inputGob.value = data.about;
@@ -66,6 +66,7 @@ const handleProfileLoad = api.getInfoUserOfServ();
 handleProfileLoad
   .then((res) => {
     newUserInfo.setUserInfo(res)
+    newUserInfo.setAvatar(res.avatar)
     userId = res._id //определяем id пользователя
   })
 
@@ -79,7 +80,7 @@ const handleProfileSumbit = (data) => {
 
 const profileOpenedPopup = new PopupWithForm('.popup_type_profile', handleProfileSumbit);
 profileOpenedPopup.setEventListeners();
-document.querySelector('.profile__open-popup').addEventListener('click', handleProfileEdit);
+document.querySelector('.profile__open-popup').addEventListener('click', handleProfileSubmit);
 
 //первоначальная инициализация карточек на странице
 api.getInitialCards()
@@ -116,7 +117,16 @@ document.querySelector('.profile__adding-button').addEventListener('click', () =
   placeOpenedPopup.open();
 })
 
-const handleAvatarFormSubmit =()=>{}
+const handleAvatarFormSubmit =(avatar)=>{
+  api.setAvatar(avatar)
+  .then((res)=>{
+    newUserInfo.setAvatar(res.avatar)
+  })
+}
+
+
+
+
 const avatarChangingPopup = new PopupWithForm('.popup_type_change-avatar', handleAvatarFormSubmit);
 
 avatarChangingPopup.setEventListeners()
