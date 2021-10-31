@@ -24,8 +24,8 @@ module.exports = {
       {
         // применять это правило только к CSS-файлам
         test: /\.css$/,
-//: MiniCssExtractPlugin.loader
-        use: [('style-loader'), {
+//: 
+        use: [(MiniCssExtractPlugin.loader), {
           loader: 'css-loader',
           options: { importLoaders: 1 }
         },

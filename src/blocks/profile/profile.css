@@ -6,7 +6,11 @@
   padding: 40px 0 50px 0;
   color: #FFFFFF;
   box-sizing: border-box;
+  position: relative;
 }
+
+
+
 @media (max-width: 1024px) {
   .profile {
     flex-direction: column;

@@ -47,7 +47,7 @@ const createCard = (item) => {
 
 const newUserInfo = new UserInfo({
   nameSelector: '.profile__title',
-  specializationSelector: '.profile__specification', avatarSelector: '.profile__avatar'
+  specializationSelector: '.profile__specification', avatarSelector: '.profile__img'
 });
 
 //колбэк функция для кнопки "редактировать профайл"
