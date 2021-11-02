@@ -1,6 +1,8 @@
 import { FormValidator } from '../components/FormValidator.js';
-import { config, configConnection, cardsTemplateSelector, containerSelector,
-  inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar} from '../utils/constants.js';
+import {
+  config, configConnection, cardsTemplateSelector, containerSelector,
+  inputName, inputGob, formEditProfile, formNewPlace, formEditAvatar
+} from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -36,11 +38,11 @@ const createCard = (item) => {
         .then(data => {
           card.setLikesInfo({ ...data });
         })
+        .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
     },
     handleBinClick: (card) => {
       cardDeletePopup.open(card);
     }
-
   },
     cardsTemplateSelector);
   return card.generateCard();
@@ -62,36 +64,40 @@ const handleProfileSubmit = () => {
 
 const api = new Api(configConnection);
 
-//первоначальная инициализация карточек на странице
-api.getInitialCards()
-  .then((res) => {
+//запрос данных карточек с сервера
+const promiseCardsLoad = api.getInitialCards()
+
+
+//запрос данных профайла с сервера
+const promiseProfileLoad = api.getInfoUserOfServ();
+
+//после запроса всех данных с сервера идет их отрисовка
+Promise.all([promiseProfileLoad, promiseCardsLoad])
+  .then(([profileData, cardsData]) => {
+    newUserInfo.setUserInfo(profileData)
+    newUserInfo.setAvatar(profileData.avatar)
+    userId = profileData._id
     //отсортируем массив объектов по убыванию даты, для корректной отрисовки
-    res.sort((a, b) => { return new Date(a.createdAt) - new Date(b.createdAt) });
+    cardsData.sort((a, b) => { return new Date(a.createdAt) - new Date(b.createdAt) });
     cardsList = new Section({
-      items: res,
+      items: cardsData,
       renderer: (item) => {
         cardsList.addItem(createCard(item));
       }
     }, containerSelector);
     cardsList.renderItems();
   })
-
-//коллбэк для загрузки данных профайла и аватара с сервера
-const handleProfileLoad = api.getInfoUserOfServ();
-handleProfileLoad
-  .then((res) => {
-    newUserInfo.setUserInfo(res)
-    newUserInfo.setAvatar(res.avatar)
-    userId = res._id //определяем id пользователя
-  })
-
+  .catch(err => console.log(`Ошибка загрузки данных с сервера: ${err}`))
 
 //колбэк функция для сабмита формы попапа по редактированию профиля
 const handleProfileSumbit = (data) => {
-  const body = JSON.stringify({ name: data.name, about: data.about })
   profileOpenedPopup.renderLoading(true);
-  api.setNewUserInfo(body)
-    .then(newUserInfo.setUserInfo(data))
+  api.setNewUserInfo(data)
+    .then((data) => {
+      newUserInfo.setUserInfo(data);
+      profileOpenedPopup.close()
+    })
+    .catch(err => console.log(`Ошибка сохранения: ${err}`))
     .finally(() => {
       profileOpenedPopup.renderLoading(false);
     })
@@ -108,8 +114,10 @@ const handlePlaceFormSubmit = ({ place, link }) => {
   const data = { name: place, link: link };
   api.setNewCard(data)
     .then((res) => {
-      cardsList.addItem(createCard(res))
+      cardsList.addItem(createCard(res));
+      placeOpenedPopup.close()
     })
+    .catch(err => console.log(`Ошибка сохранения: ${err}`))
     .finally(() => {
       placeOpenedPopup.renderLoading(false);
     })
@@ -128,7 +136,9 @@ const handleAvatarFormSubmit = (avatar) => {
   api.setAvatar(avatar)
     .then((res) => {
       newUserInfo.setAvatar(res.avatar)
+      avatarChangingPopup.close();
     })
+    .catch(err => console.log(`Ошибка сохранения аватара: ${err}`))
     .finally(() => {
       avatarChangingPopup.renderLoading(false);
     })
@@ -148,6 +158,7 @@ const handleDeleteCardSubmit = (card) => {
       card.deleteCard()
       cardDeletePopup.close();
     })
+    .catch(err => console.log(`Ошибка удаления карточки: ${err}`))
 }
 
 const cardDeletePopup = new PopupForConfirm('.popup_type_delete-card', handleDeleteCardSubmit)

@@ -18,7 +18,6 @@ export class Api {
       headers: this._headers,
     })
       .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка загрузки данных с сервера: ${err}`))
   }
 
   getInfoUserOfServ() {
@@ -27,17 +26,15 @@ export class Api {
       headers: this._headers,
     })
       .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка загрузки профайла: ${err}`))
   }
 
-  setNewUserInfo(body) {
+  setNewUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
-      body: body,
+      body: JSON.stringify({ name: data.name, about: data.about }),
       headers: this._headers,
     })
       .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка сохранения: ${err}`))
   }
 
   setNewCard(body) {
@@ -47,25 +44,7 @@ export class Api {
       headers: this._headers,
     })
       .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка сохранения: ${err}`))
   }
-  setLike(cardId) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
-      method: 'PUT',
-      headers: this._headers,
-    })
-      .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка изменения статуса лайка: ${err}`))
-  }
-  deleteLike(cardId) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
-      .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка связи с сервером: ${err}`))
-  }
-
   likeCard(cardId, isLiked) {
     return fetch(`${this._url}/cards/likes/${cardId}`, {
       method: isLiked ? "DELETE" : "PUT",
@@ -83,21 +62,12 @@ export class Api {
       .then(this._checkRequest)
       .catch(err => console.log(`Ошибка сохранения аватара: ${err}`))
   }
-  getAvatarFromServ() {
-    return fetch(`${this._url}/users/me`, {
-      method: 'GET',
-      headers: this._headers,
-    })
-      .then(this._checkRequest)
-      .catch(err => console.log(`Ошибка загрузки профайла: ${err}`))
-  }
-  deleteCard(cardId){
+  deleteCard(cardId) {
     return fetch(`${this._url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(this._checkRequest)
-    .catch(err => console.log(`Ошибка удаления карточки: ${err}`))
+      .then(this._checkRequest)
   }
 }
 

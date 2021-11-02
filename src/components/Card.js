@@ -76,9 +76,9 @@ export class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
     // Добавим данные
-    this._element.querySelector('.place__img').src = this._link;
+    this._imageElement.src = this._link;
     this._element.querySelector('.place__paragraf').textContent = this._text;
-    this._element.querySelector('.place__img').alt = `Фото пользователя: ${this._text}`;
+    this._imageElement.alt = `Фото пользователя: ${this._text}`;
     this._element.querySelector('.place__like-amount').textContent = this._likeAmount;
 
     if (this._authorId !== this._userId) { this._deleteCardButton.remove() }
